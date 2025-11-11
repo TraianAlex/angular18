@@ -1,15 +1,24 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, input, output, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  input,
+  output,
+  viewChild,
+} from '@angular/core';
 import { outputFromObservable, outputToObservable } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
-import { Book } from '../models/types';
+import { Book } from '../../models/types';
 
 @Component({
-    selector: 'app-signals2',
-    imports: [AsyncPipe],
-    templateUrl: './signals2.component.html',
-    styleUrl: './signals2.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-signals2',
+  imports: [AsyncPipe],
+  templateUrl: './signals2.component.html',
+  styleUrl: './signals2.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Signals2Component {
   name = input<string>('World');

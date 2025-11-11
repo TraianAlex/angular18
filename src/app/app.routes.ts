@@ -6,14 +6,17 @@ export const routes: Routes = [
     loadComponent: () => import('./test/test.component').then((m) => m.TestComponent),
     children: [
       { path: '', redirectTo: '', pathMatch: 'full' },
-      { path: 'signals', loadComponent: () => import('./signals/signals.component').then((m) => m.SignalsComponent) },
+      {
+        path: 'signals',
+        loadComponent: () => import('./test/signals/signals.component').then((m) => m.SignalsComponent),
+      },
       {
         path: 'signals1',
-        loadComponent: () => import('./signals1/signals1.component').then((m) => m.Signals1Component),
+        loadComponent: () => import('./test/signals1/signals1.component').then((m) => m.Signals1Component),
       },
       {
         path: 'signals2',
-        loadComponent: () => import('./signals2/signals2.component').then((m) => m.Signals2Component),
+        loadComponent: () => import('./test/signals2/signals2.component').then((m) => m.Signals2Component),
       },
     ],
   },

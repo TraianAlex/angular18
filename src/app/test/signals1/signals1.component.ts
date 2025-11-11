@@ -15,10 +15,10 @@ export class Signals1Component implements OnInit {
   signalService = inject(SignalService);
 
   count = this.signalService.count;
+  userLoggedIn = this.signalService.userLoggedIn;
+  orderStatus = this.signalService.orderStatus;
+  mySignal = this.signalService.mySign;
 
-  mySignal = signal({ foo: 'bar' });
-  orderStatus = signal<OrderStatus>('placed');
-  userLoggedIn = signal<boolean>(false);
   cartItemsSignal = signal<string[]>([]);
   myObject = signal(
     {
@@ -30,11 +30,6 @@ export class Signals1Component implements OnInit {
   );
 
   ngOnInit(): void {
-    // Update order status triggers recomputation of prepareFoodValue
-    this.orderStatus.set('cooking');
-
-    // Simulate user login (you can replace this with actual login logic)
-    this.userLoggedIn.set(true);
     // When user logs in, add dependency on user data (simulated by userDataSignal)
     computed(() => {
       if (this.userLoggedIn()) {
@@ -47,12 +42,11 @@ export class Signals1Component implements OnInit {
   }
 
   setNewValue() {
-    this.mySignal.set({ foo: 'bar1' });
+    this.signalService.setNewValueSignal();
   }
 
   updateValue() {
-    const currentValue = this.mySignal();
-    this.mySignal.set({ ...currentValue, foo: currentValue.foo + 'x' });
+    this.signalService.updateValueSignal();
   }
 
   doubleCountValue = computed(() => {

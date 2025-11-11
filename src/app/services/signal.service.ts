@@ -9,9 +9,23 @@ import { toSignal } from '@angular/core/rxjs-interop';
   providedIn: 'root',
 })
 export class SignalService {
+  userLoggedInSignal = signal<boolean>(false);
+  userLoggedIn = this.userLoggedInSignal.asReadonly();
+
   mySignal: WritableSignal<{ foo: string }> = signal({ foo: 'bar' });
-  orderStatus = signal<OrderStatus>('placed');
-  userLoggedIn = signal<boolean>(false);
+  mySign = this.mySignal.asReadonly();
+  setNewValueSignal() {
+    this.mySignal.set({ foo: 'bar1' });
+  }
+
+  updateValueSignal() {
+    const currentValue = this.mySignal();
+    this.mySignal.set({ ...currentValue, foo: currentValue.foo + 'x' });
+  }
+
+  orderStatusSignal = signal<OrderStatus>('placed');
+  orderStatus = this.orderStatusSignal.asReadonly();
+
   cartItemsSignal = signal<string[]>([]);
   myObject = signal(
     {
@@ -31,13 +45,13 @@ export class SignalService {
     this.rateSignal = toSignal(this.rates$, { initialValue: { USD: 1, GBP: 1, EUR: 1 } });
 
     // Update order status triggers recomputation of prepareFoodValue
-    this.orderStatus.set('cooking');
+    this.orderStatusSignal.set('cooking');
 
     // Simulate user login (you can replace this with actual login logic)
-    this.userLoggedIn.set(true);
+    this.userLoggedInSignal.set(true);
     // When user logs in, add dependency on user data (simulated by userDataSignal)
     computed(() => {
-      if (this.userLoggedIn()) {
+      if (this.userLoggedInSignal()) {
         // Add dependency
       } else {
         // Remove dependency

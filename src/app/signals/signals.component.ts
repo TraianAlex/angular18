@@ -4,11 +4,10 @@ import { RouterOutlet } from '@angular/router';
 import { Signals2Component } from '../signals2/signals2.component';
 
 @Component({
-  selector: 'app-signals',
-  standalone: true,
-  imports: [RouterOutlet, Signals2Component],
-  templateUrl: './signals.component.html',
-  styleUrl: './signals.component.scss',
+    selector: 'app-signals',
+    imports: [RouterOutlet, Signals2Component],
+    templateUrl: './signals.component.html',
+    styleUrl: './signals.component.scss'
 })
 export class SignalsComponent {
   clicks = 0;

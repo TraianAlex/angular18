@@ -5,12 +5,11 @@ import { of } from 'rxjs';
 import { Book } from '../models/types';
 
 @Component({
-  selector: 'app-signals2',
-  standalone: true,
-  imports: [AsyncPipe],
-  templateUrl: './signals2.component.html',
-  styleUrl: './signals2.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-signals2',
+    imports: [AsyncPipe],
+    templateUrl: './signals2.component.html',
+    styleUrl: './signals2.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Signals2Component {
   name = input<string>('World');

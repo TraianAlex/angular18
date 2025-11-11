@@ -4,11 +4,10 @@ import { Component, computed, OnInit, signal, WritableSignal } from '@angular/co
 import { OrderStatus } from '../models/types';
 
 @Component({
-  selector: 'app-signals1',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './signals1.component.html',
-  styleUrl: './signals1.component.scss',
+    selector: 'app-signals1',
+    imports: [CommonModule],
+    templateUrl: './signals1.component.html',
+    styleUrl: './signals1.component.scss'
 })
 export class Signals1Component implements OnInit {
   mySignal: WritableSignal<{ foo: string }> = signal({ foo: 'bar' });

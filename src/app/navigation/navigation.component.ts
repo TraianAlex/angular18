@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -6,7 +6,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     standalone: true,
     imports: [RouterLink, RouterLinkActive],
     templateUrl: './navigation.component.html',
-    styleUrl: './navigation.component.scss'
+    styleUrl: './navigation.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationComponent {}
 

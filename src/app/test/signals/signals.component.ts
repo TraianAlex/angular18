@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { Signals2Component } from '../signals2/signals2.component';
@@ -8,6 +8,7 @@ import { Signals2Component } from '../signals2/signals2.component';
   imports: [RouterOutlet, Signals2Component],
   templateUrl: './signals.component.html',
   styleUrl: './signals.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalsComponent {
   clicks = 0;

@@ -7,6 +7,7 @@ import {
   ElementRef,
   input,
   output,
+  signal,
   viewChild,
 } from '@angular/core';
 import { outputFromObservable, outputToObservable } from '@angular/core/rxjs-interop';
@@ -29,6 +30,11 @@ export class Signals2Component {
   greetingClicked$ = outputToObservable(this.greetingClicked);
 
   greeting = computed(() => 'Hello ' + this.name());
+
+  book = signal<Book>({
+    title: 'Angular Core Deep Dive',
+    synopsis: 'A deep dive into the core features of Angular.',
+  });
 
   constructor() {
     effect(() => {

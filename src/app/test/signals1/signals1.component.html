@@ -1,9 +1,11 @@
 <div>
   <p>Current Value: {{ mySignal() | json }}</p>
-  <button (click)="setNewValue()">Set New Value</button>
-  <button (click)="updateValue()">Update Value</button>
-
+  <button class="bg-blue-500 text-white p-2 rounded-md mr-2" (click)="setNewValue()">Set New Value</button>
+  <button class="bg-blue-500 text-white p-2 rounded-md mb-2" (click)="updateValue()">Update Value</button>
+<hr />
+<button class="bg-blue-500 text-white p-2 rounded-md mt-2" (click)="incrementCount()">Increment Count</button>
   <p>Double Count: {{ doubleCountValue() }}</p>
+  <hr />
   <p>Order Status: {{ orderStatus() }}</p>
   <p>Food Preparation Status: {{ prepareFoodValue() }}</p>
 

@@ -1,12 +1,14 @@
 <p>Hello {{ name() }}!</p>
 
-<button (click)="greetingClicked.emit('click')">Clickable greeting "{{ greeting() }}"!</button>
+<button class="bg-blue-500 text-white p-2 rounded-md" (click)="greetingClicked.emit('click')">
+  Clickable greeting "{{ greeting() }}"!
+</button>
 <br />
 Observable from output:<br />
 {{ greetingClicked$ | async }}
 <br />
 
-<!-- <b>{{ book()?.title }}</b>
-<div>{{ book()?.synopsis }}</div> -->
+<b>{{ book().title }}</b>
+<div>{{ book().synopsis }}</div>
 
-<b #title>Title</b>
+<p #title>Title</p>

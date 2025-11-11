@@ -1,17 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, OnInit, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 
 import { OrderStatus } from '../../models/types';
+import { SignalService } from '../../services/signal.service';
 
 @Component({
   selector: 'app-signals1',
   imports: [CommonModule],
   templateUrl: './signals1.component.html',
   styleUrl: './signals1.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Signals1Component implements OnInit {
-  mySignal: WritableSignal<{ foo: string }> = signal({ foo: 'bar' });
-  count = signal<number>(1);
+  signalService = inject(SignalService);
+
+  count = this.signalService.count;
+
+  mySignal = signal({ foo: 'bar' });
   orderStatus = signal<OrderStatus>('placed');
   userLoggedIn = signal<boolean>(false);
   cartItemsSignal = signal<string[]>([]);
@@ -47,12 +52,16 @@ export class Signals1Component implements OnInit {
 
   updateValue() {
     const currentValue = this.mySignal();
-    this.mySignal.set({ ...currentValue, foo: currentValue.foo + '1' });
+    this.mySignal.set({ ...currentValue, foo: currentValue.foo + 'x' });
   }
 
   doubleCountValue = computed(() => {
     return this.count() * 2;
   });
+
+  incrementCount() {
+    this.signalService.incrementCount();
+  }
 
   // Create a computed signal (derived from order status) for food preparation
   prepareFoodValue = computed(() => {
@@ -64,7 +73,6 @@ export class Signals1Component implements OnInit {
   });
 
   areObjectsEqual = computed(() => {
-    const myObj = { name: 'name1' };
-    return this.myObject().name === myObj.name;
+    return this.myObject() === this.mySignal;
   });
 }

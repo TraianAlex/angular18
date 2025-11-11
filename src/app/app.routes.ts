@@ -1,18 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { TestComponent } from './test/test.component';
-import { SignalsComponent } from './signals/signals.component';
-import { Signals1Component } from './signals1/signals1.component';
-import { Signals2Component } from './signals2/signals2.component';
-
 export const routes: Routes = [
   {
     path: '',
-    component: TestComponent,
+    loadComponent: () => import('./test/test.component').then((m) => m.TestComponent),
   },
   {
     path: 'test',
-    component: SignalsComponent,
+    loadComponent: () => import('./signals/signals.component').then((m) => m.SignalsComponent),
     children: [
       // { path: '', redirectTo: '', pathMatch: 'full' },
       // { path: 'signals1', component: Signals1Component },
@@ -23,11 +18,11 @@ export const routes: Routes = [
   },
   {
     path: 'signals1',
-    component: Signals1Component,
+    loadComponent: () => import('./signals1/signals1.component').then((m) => m.Signals1Component),
   },
   {
     path: 'signals2',
-    component: Signals2Component,
+    loadComponent: () => import('./signals2/signals2.component').then((m) => m.Signals2Component),
   },
   // {
   //   path: 'reactive',

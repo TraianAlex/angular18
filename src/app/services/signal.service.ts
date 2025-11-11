@@ -10,6 +10,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class SignalService {
   private http = inject(HttpClient);
+
   mySignal: WritableSignal<{ foo: string }> = signal({ foo: 'bar' });
   count = signal<number>(1);
   orderStatus = signal<OrderStatus>('placed');

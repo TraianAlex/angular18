@@ -1,0 +1,12 @@
+<p>Hello {{ name() }}!</p>
+
+<button (click)="greetingClicked.emit('click')">Clickable greeting "{{ greeting() }}"!</button>
+<br />
+Observable from output:<br />
+{{ greetingClicked$ | async }}
+<br />
+
+<!-- <b>{{ book()?.title }}</b>
+<div>{{ book()?.synopsis }}</div> -->
+
+<b #title>Title</b>

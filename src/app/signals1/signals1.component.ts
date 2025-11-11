@@ -1,12 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component, computed, OnInit, signal, WritableSignal } from '@angular/core';
 
-type OrderStatus = 'placed' | 'cooking' | 'delivered';
-type UserData = {
-  id: number;
-  name: string;
-  email: string;
-};
+import { OrderStatus } from '../models/types';
 
 @Component({
   selector: 'app-signals1',
@@ -16,14 +11,14 @@ type UserData = {
   styleUrl: './signals1.component.scss',
 })
 export class Signals1Component implements OnInit {
-  mySignal = signal({ foo: 'bar' });
+  mySignal: WritableSignal<{ foo: string }> = signal({ foo: 'bar' });
   count = signal<number>(1);
   orderStatus = signal<OrderStatus>('placed');
   userLoggedIn = signal<boolean>(false);
   cartItemsSignal = signal<string[]>([]);
   myObject = signal(
     {
-      name: 'Nnamdi',
+      name: 'name1',
     },
     {
       equal: (a: { name: any }, b: { name: any }) => a.name === b.name,
@@ -70,6 +65,7 @@ export class Signals1Component implements OnInit {
   });
 
   areObjectsEqual = computed(() => {
-    return this.myObject() === this.mySignal;
+    const myObj = { name: 'name1' };
+    return this.myObject().name === myObj.name;
   });
 }

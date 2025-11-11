@@ -1,33 +1,6 @@
-<main class="main">
-  <div class="navigation">
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['']">Test</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/test']">Signals</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/signals1']">Signals1</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/signals2']">Signals2 Component</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/test/todos']">aaaaaa</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/test/todos-basic']">aaaaaaa</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/test/todos-reactive']">aaaaaaa</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/test/selectors']">aaaaaa</a>
-      </li>
-    </ul>
-  </div>
-  <div class="content">
+<main class="">
+  <app-navigation />
+  <div class="">
     <router-outlet />
   </div>
 </main>

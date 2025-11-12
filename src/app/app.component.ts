@@ -7,6 +7,5 @@ import { NavigationComponent } from './navigation/navigation.component';
     selector: 'app-root',
     imports: [RouterOutlet, NavigationComponent],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
 })
 export class AppComponent {}

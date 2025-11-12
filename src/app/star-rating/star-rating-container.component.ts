@@ -6,6 +6,5 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './star-rating-container.component.html',
-  styleUrl: './star-rating-container.component.scss',
 })
 export class StarRatingContainerComponent {}

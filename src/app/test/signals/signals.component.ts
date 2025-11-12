@@ -7,7 +7,6 @@ import { Signals2Component } from '../signals2/signals2.component';
   selector: 'app-signals',
   imports: [RouterOutlet, Signals2Component],
   templateUrl: './signals.component.html',
-  styleUrl: './signals.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalsComponent {

@@ -18,7 +18,6 @@ import { Book } from '../../models/types';
   selector: 'app-signals2',
   imports: [AsyncPipe],
   templateUrl: './signals2.component.html',
-  styleUrl: './signals2.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Signals2Component {

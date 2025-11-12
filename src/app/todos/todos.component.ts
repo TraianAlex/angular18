@@ -12,7 +12,6 @@ export interface Todo {
   standalone: true,
   imports: [FormsModule],
   templateUrl: './todos.component.html',
-  styleUrl: './todos.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodosComponent {

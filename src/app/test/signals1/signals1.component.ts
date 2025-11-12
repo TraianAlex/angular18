@@ -7,7 +7,6 @@ import { SignalService } from '../../services/signal.service';
   selector: 'app-signals1',
   imports: [CommonModule],
   templateUrl: './signals1.component.html',
-  styleUrl: './signals1.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Signals1Component implements OnInit {

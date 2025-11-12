@@ -2,8 +2,9 @@ import { computed, Injectable } from '@angular/core';
 import { signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { OrderStatus } from '../models/types';
 import { toSignal } from '@angular/core/rxjs-interop';
+
+import { OrderStatus } from '../models/types';
 
 @Injectable({
   providedIn: 'root',

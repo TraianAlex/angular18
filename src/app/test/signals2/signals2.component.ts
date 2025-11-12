@@ -11,6 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { outputToObservable } from '@angular/core/rxjs-interop';
+
 import { Book } from '../../models/types';
 
 @Component({

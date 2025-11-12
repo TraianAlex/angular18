@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 
-import { OrderStatus } from '../../models/types';
 import { SignalService } from '../../services/signal.service';
 
 @Component({

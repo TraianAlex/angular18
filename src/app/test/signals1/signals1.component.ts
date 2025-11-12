@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 
-import { SignalService } from '../signals/signal.service';
+import { SignalService } from '../signal.service';
 
 @Component({
   selector: 'app-signals1',

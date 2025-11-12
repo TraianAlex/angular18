@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 export interface Todo {
@@ -20,8 +20,8 @@ export class TodosComponent {
     { id: 2, title: 'Build a Todo App', completed: false },
     { id: 3, title: 'Master Reactive Programming', completed: true },
   ]);
-
   newTodoTitle = signal<string>('');
+  completedCount = computed(() => this.todos().filter((todo) => todo.completed).length);
 
   addTodo() {
     const title = this.newTodoTitle().trim();
@@ -44,13 +44,5 @@ export class TodosComponent {
 
   deleteTodo(id: number) {
     this.todos.update((todos) => todos.filter((todo) => todo.id !== id));
-  }
-
-  completedCount() {
-    return this.todos().filter((todo) => todo.completed).length;
-  }
-
-  totalCount() {
-    return this.todos().length;
   }
 }

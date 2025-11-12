@@ -5,7 +5,7 @@ export const routes: Routes = [
     path: '',
     loadComponent: () => import('./test/test.component').then((m) => m.TestComponent),
     children: [
-      { path: '', redirectTo: '', pathMatch: 'full' },
+      { path: '', redirectTo: 'signals', pathMatch: 'full' },
       {
         path: 'signals',
         loadComponent: () => import('./test/signals/signals.component').then((m) => m.SignalsComponent),

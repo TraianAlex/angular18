@@ -20,6 +20,10 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'todos',
+    loadComponent: () => import('./todos/todos.component').then((m) => m.TodosComponent),
+  },
   // {
   //   path: 'reactive',
   //   component: ReactiveComponent,

@@ -1,0 +1,55 @@
+<div class="max-w-2xl mx-auto p-6">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">Todos</h1>
+
+  <div class="mb-6">
+    <div class="flex gap-2">
+      <input
+        type="text"
+        [value]="newTodoTitle()"
+        (input)="newTodoTitle.set($any($event.target).value)"
+        (keyup.enter)="addTodo()"
+        placeholder="Add a new todo..."
+        class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      />
+      <button
+        (click)="addTodo()"
+        class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-4 text-sm text-gray-600">
+    <span class="font-medium">{{ completedCount() }}</span> of <span class="font-medium">{{ totalCount() }}</span> tasks
+    completed
+  </div>
+
+  <div class="space-y-2">
+    @for (todo of todos(); track todo.id) {
+    <div
+      class="flex items-center gap-3 p-4 bg-white border border-gray-200 rounded-md hover:shadow-md transition-shadow duration-200"
+      [class.line-through]="todo.completed"
+      [class.opacity-60]="todo.completed"
+    >
+      <input
+        type="checkbox"
+        [checked]="todo.completed"
+        (change)="toggleTodo(todo.id)"
+        class="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
+      />
+      <span class="flex-1 text-gray-800">{{ todo.title }}</span>
+      <button
+        (click)="deleteTodo(todo.id)"
+        class="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-200"
+      >
+        Delete
+      </button>
+    </div>
+    } @empty {
+    <div class="text-center py-8 text-gray-500">
+      <p class="text-lg">No todos yet. Add one above!</p>
+    </div>
+    }
+  </div>
+</div>

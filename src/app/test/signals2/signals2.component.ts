@@ -10,8 +10,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { outputFromObservable, outputToObservable } from '@angular/core/rxjs-interop';
-import { of } from 'rxjs';
+import { outputToObservable } from '@angular/core/rxjs-interop';
 import { Book } from '../../models/types';
 
 @Component({
@@ -42,12 +41,13 @@ export class Signals2Component {
     });
   }
 
-  // TODO: Implement the deleteBook signal
-  // outputFromObservable() turns an Observable into an OutputRef
-  deleteBook = outputFromObservable<Book>(
-    of({
-      title: 'Angular Core Deep Dive',
-      synopsis: 'A deep dive into the core features of Angular.',
-    })
-  );
+  // deleteBook output emits the book when it's deleted
+  deleteBook = output<Book>();
+
+  deleteBookHandler() {
+    this.book.set({
+      title: '',
+      synopsis: '',
+    });
+  }
 }

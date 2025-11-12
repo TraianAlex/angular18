@@ -24,16 +24,34 @@ export const routes: Routes = [
     path: 'todos',
     loadComponent: () => import('./todos/todos.component').then((m) => m.TodosComponent),
   },
-  // {
-  //   path: 'reactive',
-  //   component: ReactiveComponent,
-  //   loadChildren: () => import('./reactive/routes').then((mod) => mod.REACTIVE_ROUTES),
-  // },
-  // {
-  //   path: 'rxjs-basic',
-  //   component: RxjsBasicComponent,
-  //   loadChildren: () => import('./rxjs-basic/routes').then((mod) => mod.RXJS_BASIC),
-  // },
+  {
+    path: 'star-rating',
+    loadComponent: () =>
+      import('./star-rating/star-rating-container.component').then((m) => m.StarRatingContainerComponent),
+    children: [
+      {
+        path: '',
+        redirectTo: 'star-rating',
+        pathMatch: 'full',
+      },
+      {
+        path: 'star-rating',
+        loadComponent: () => import('./star-rating/start-rating.component').then((m) => m.StarRatingComponent),
+      },
+      {
+        path: 'star-rating2',
+        loadComponent: () => import('./star-rating/star-rating2.component').then((m) => m.ReactionPickerComponent),
+      },
+      {
+        path: 'feedback-form',
+        loadComponent: () => import('./star-rating/feedback-form.component').then((m) => m.FeedbackFormComponent),
+      },
+      {
+        path: 'toggle-switch',
+        loadComponent: () => import('./star-rating/toggle-switch.component').then((m) => m.ToggleSwitchComponent),
+      },
+    ],
+  },
   {
     path: '**',
     redirectTo: '',

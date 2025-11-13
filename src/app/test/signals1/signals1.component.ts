@@ -3,6 +3,11 @@ import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal, W
 
 import { SignalService } from '../signal.service';
 
+export type User = {
+  name: string;
+  age: number;
+};
+
 @Component({
   selector: 'app-signals1',
   imports: [CommonModule],
@@ -67,4 +72,57 @@ export class Signals1Component implements OnInit {
   areObjectsEqual = computed(() => {
     return this.myObject() === this.mySignal;
   });
+
+  user = signal<User>({
+    name: 'Alice',
+    age: 25,
+  });
+
+  name = computed(() => this.user().name);
+  age = computed(() => this.user().age);
+
+  updateName() {
+    const i = Math.floor(Math.random() * names.length);
+    this.user.update((user) => ({
+      ...user,
+      name: names[i],
+    }));
+  }
+
+  updateAge() {
+    setTimeout(() => {
+      this.user.update((user) => ({
+        ...user,
+        age: Math.floor(Math.random() * 70 + 20),
+      }));
+    }, 1);
+  }
+
+  mutateAge() {
+    const user = this.user();
+    user.age = Math.floor(Math.random() * 70 + 20);
+  }
+
+  mutateAgeAndSet() {
+    const user = this.user();
+    user.age = Math.floor(Math.random() * 70 + 20);
+    this.user.set(user);
+  }
 }
+
+const names = [
+  'Bob',
+  'Max',
+  'Emma',
+  'Marti',
+  'Neus',
+  'Ona',
+  'Marina',
+  'Jordi',
+  'Andreu',
+  'Marc',
+  'Jana',
+  'Montse',
+  'Berta',
+  'Mariona',
+];

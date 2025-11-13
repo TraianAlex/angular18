@@ -2,8 +2,8 @@
   <p>Current Value: {{ mySignal() | json }}</p>
   <button class="bg-blue-500 text-white p-2 rounded-md mr-2" (click)="setNewValue()">Set New Value</button>
   <button class="bg-blue-500 text-white p-2 rounded-md mb-2" (click)="updateValue()">Update Value</button>
-<hr />
-<button class="bg-blue-500 text-white p-2 rounded-md mt-2" (click)="incrementCount()">Increment Count</button>
+  <hr />
+  <button class="bg-blue-500 text-white p-2 rounded-md mt-2" (click)="incrementCount()">Increment Count</button>
   <p>Double Count: {{ doubleCountValue() }}</p>
   <hr />
   <p>Order Status: {{ orderStatus() }}</p>
@@ -14,5 +14,19 @@
 
   <p>Cart Item: {{ cartItemsSignal() }}</p>
 
-  <p>Objects are equal: {{ (areObjectsEqual()) }}</p>
+  <p>Objects are equal: {{ areObjectsEqual() }}</p>
+</div>
+<hr />
+
+<div>Name: {{ name() }}</div>
+<div>Age: {{ age() }}</div>
+
+<button class="bg-blue-500 text-white p-2 rounded-md mr-2" (click)="updateName()">Update Name</button>
+
+<button class="bg-blue-500 text-white p-2 rounded-md mr-2" (click)="updateAge()">Update Age</button>
+<div class="flex gap-2 mt-2">
+  <button class="bg-blue-500 text-white p-2 rounded-md mr-2" (click)="mutateAge()">Mutate Age</button>
+  <button class="bg-blue-500 text-white p-2 rounded-md mr-2" (click)="mutateAgeAndSet()">
+    Mutate Age and Set User
+  </button>
 </div>

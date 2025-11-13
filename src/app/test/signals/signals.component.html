@@ -3,4 +3,11 @@ Let's use a signal input here:<br />
 <app-signals2 name="Signal2 component" (greetingClicked)="eventReceived()" />
 <hr />
 Clicks: {{ clicks }}
-<router-outlet />
+<hr />
+
+<hr />
+<div>Name: {{ user.name }}</div>
+<div>Age: {{ user.age }}</div>
+
+<button class="bg-blue-500 text-white p-2 rounded-md mr-2" (click)="updateName()">Set Random Name</button>
+<button class="bg-blue-500 text-white p-2 rounded-md" (click)="updateAge()">Set Random Age</button>

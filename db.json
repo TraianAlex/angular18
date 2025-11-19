@@ -1,9 +1,8 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "Learn Angular Signals",
-      "completed": false
+      "completed": true,
+      "id": 1
     },
     {
       "id": 2,
@@ -49,7 +48,16 @@
       "id": 10,
       "title": "Deploy Application",
       "completed": false
+    },
+    {
+      "id": 1763579378889,
+      "title": "New Todo 3IT0HTBOHXQ",
+      "completed": false
+    },
+    {
+      "id": 1763579380619,
+      "title": "New Todo 2WK3KC040SX",
+      "completed": false
     }
   ]
 }
-

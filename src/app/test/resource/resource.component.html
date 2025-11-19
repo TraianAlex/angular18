@@ -9,8 +9,19 @@
 @if(todos.hasValue()) {
 <ul>
   @for(todo of todos.value(); track todo.id){
-  <li class="border border-gray-300 rounded-md p-2 mb-2">
-    {{ todo.title }}
+  <li class="border border-gray-300 rounded-md p-2 mb-2 flex items-center justify-between">
+    <input
+      type="checkbox"
+      [checked]="todo.completed"
+      (change)="toggleTodo(todo.id)"
+      class="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer me-2"
+    />
+    <span [class.line-through]="todo.completed">{{ todo.title }}</span>
+    <div>
+      <button type="button" class="bg-red-500 text-white px-2 py-1 rounded-md" (click)="deleteTodo(todo.id)">
+        Delete
+      </button>
+    </div>
   </li>
   }
 </ul>

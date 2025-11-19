@@ -19,6 +19,7 @@ export class ResourceComponent {
   searchQuery = signal('');
   newTodoTitle = signal('');
   addTodoTrigger = signal<Todo | null>(null);
+  deleteTodoTrigger = signal<number | null>(null);
 
   // Build the API URL with json-server filtering
   // json-server supports title_like for partial string matching
@@ -43,6 +44,15 @@ export class ResourceComponent {
     { requireSync: false }
   );
 
+  // Convert delete trigger signal to observable, then switchMap to HTTP call
+  deleteTodoResult = toSignal(
+    toObservable(this.deleteTodoTrigger).pipe(
+      filter((id): id is number => id !== null),
+      switchMap((id) => this.resourceService.deleteTodo(id))
+    ),
+    { requireSync: false }
+  );
+
   // Effect to reload todos after successful addition
   constructor() {
     effect(() => {
@@ -52,6 +62,15 @@ export class ResourceComponent {
         this.todos.reload();
         this.newTodoTitle.set('');
         this.addTodoTrigger.set(null);
+      }
+    });
+
+    effect(() => {
+      const result = this.deleteTodoResult();
+      if (result) {
+        // Reload todos after successful deletion
+        this.todos.reload();
+        this.deleteTodoTrigger.set(null);
       }
     });
   }
@@ -69,7 +88,6 @@ export class ResourceComponent {
       title,
       completed: false,
     };
-
     // Trigger the add todo operation
     this.addTodoTrigger.set(newTodo);
 
@@ -79,12 +97,10 @@ export class ResourceComponent {
   }
 
   deleteTodo(id: number) {
-    this.resourceService
-      .deleteTodo(id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.todos.update((todos) => todos?.filter((todo) => todo.id !== id) ?? []);
-      });
+    // Optimistically update the UI
+    this.todos.update((todos) => todos?.filter((todo) => todo.id !== id) ?? []);
+    // Trigger the delete todo operation
+    this.deleteTodoTrigger.set(id);
   }
 
   toggleTodo(id: number) {

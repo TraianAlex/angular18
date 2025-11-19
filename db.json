@@ -1,10 +1,6 @@
 {
   "todos": [
     {
-      "completed": true,
-      "id": 1
-    },
-    {
       "id": 2,
       "title": "Build a Todo App",
       "completed": false
@@ -57,6 +53,21 @@
     {
       "id": 1763579380619,
       "title": "New Todo 2WK3KC040SX",
+      "completed": false
+    },
+    {
+      "id": 1763579908474,
+      "title": "New Todo JRDUCJI9AGD",
+      "completed": false
+    },
+    {
+      "id": 1763579914353,
+      "title": "New Todo 1XQQ0DV2YMR",
+      "completed": false
+    },
+    {
+      "id": 1763579926577,
+      "title": "New Todo HHU0TEBIW4",
       "completed": false
     }
   ]

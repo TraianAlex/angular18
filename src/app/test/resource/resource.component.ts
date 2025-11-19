@@ -67,6 +67,15 @@ export class ResourceComponent {
 
   // Effect to reload todos after successful addition
   constructor() {
+    // Effect to handle errors when fetching todos
+    effect(() => {
+      const error = this.todos.error();
+      if (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Failed to fetch todos. Please try again.';
+        this.messagesService.showMessage(errorMessage, 'error', 5);
+      }
+    });
+
     effect(() => {
       const result = this.addTodoResult();
       if (result) {

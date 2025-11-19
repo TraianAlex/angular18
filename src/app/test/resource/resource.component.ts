@@ -5,15 +5,18 @@ import { Todo } from '../../shared/models/todos.model';
 import { environment } from '../../../environments/environment';
 import { ResourceService } from './resource.service';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { MessagesService } from '../../shared/messages/messages.service';
+import { MessagesComponent } from '../../shared/messages/messages.component';
 
 @Component({
   selector: 'app-resource',
-  imports: [],
+  imports: [MessagesComponent],
   templateUrl: './resource.component.html',
   styleUrl: './resource.component.scss',
 })
 export class ResourceComponent {
   resourceService = inject(ResourceService);
+  messagesService = inject(MessagesService);
 
   searchQuery = signal('');
   newTodoTitle = signal('');
@@ -67,6 +70,7 @@ export class ResourceComponent {
     effect(() => {
       const result = this.addTodoResult();
       if (result) {
+        this.messagesService.showMessage('Todo added successfully', 'success', 3);
         // Reload todos after successful addition
         this.todos.reload();
         this.newTodoTitle.set('');
@@ -77,6 +81,7 @@ export class ResourceComponent {
     effect(() => {
       const result = this.deleteTodoResult();
       if (result) {
+        this.messagesService.showMessage('Todo deleted successfully', 'success', 3);
         // Reload todos after successful deletion
         this.todos.reload();
         this.deleteTodoTrigger.set(null);
@@ -86,6 +91,7 @@ export class ResourceComponent {
     effect(() => {
       const result = this.toggleTodoResult();
       if (result) {
+        this.messagesService.showMessage('Todo toggled successfully', 'success', 3);
         // Reload todos after successful toggle
         this.todos.reload();
         this.toggleTodoTrigger.set(null);

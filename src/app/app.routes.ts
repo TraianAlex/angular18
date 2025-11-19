@@ -18,6 +18,10 @@ export const routes: Routes = [
         path: 'signals2',
         loadComponent: () => import('./test/signals2/signals2.component').then((m) => m.Signals2Component),
       },
+      {
+        path: 'resource',
+        loadComponent: () => import('./test/resource/resource.component').then((m) => m.ResourceComponent),
+      },
     ],
   },
   {

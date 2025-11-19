@@ -1,0 +1,25 @@
+<input
+  class="border border-gray-300 rounded-md px-4 py-2 w-full mb-4"
+  type="text"
+  [value]="searchQuery()"
+  (input)="searchQuery.set($event.target.value)"
+  placeholder="Search todos..."
+/>
+
+@if(todos.hasValue()) {
+<ul>
+  @for(todo of todos.value(); track todo.id){
+  <li class="border border-gray-300 rounded-md p-2 mb-2">
+    {{ todo.title }}
+  </li>
+  }
+</ul>
+} @else if (todos.error()) {
+<div>Error occured while loading todos</div>
+} @else if (todos.isLoading()) {
+<div>Loading todos...</div>
+}
+
+<button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md me-2" (click)="todos.reload()">Reload</button>
+<button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md me-2" (click)="resetTodos()">Clear</button>
+<button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md" (click)="addTodo()">Add Todo</button>

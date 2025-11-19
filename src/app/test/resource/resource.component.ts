@@ -1,10 +1,10 @@
-import { Component, signal, computed, inject, effect, DestroyRef } from '@angular/core';
+import { Component, signal, computed, inject, effect } from '@angular/core';
 import { switchMap, filter } from 'rxjs';
 
 import { Todo } from '../../shared/models/todos.model';
 import { environment } from '../../../environments/environment';
 import { ResourceService } from './resource.service';
-import { toSignal, toObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-resource',
@@ -14,12 +14,12 @@ import { toSignal, toObservable, takeUntilDestroyed } from '@angular/core/rxjs-i
 })
 export class ResourceComponent {
   resourceService = inject(ResourceService);
-  destroyRef = inject(DestroyRef);
 
   searchQuery = signal('');
   newTodoTitle = signal('');
   addTodoTrigger = signal<Todo | null>(null);
   deleteTodoTrigger = signal<number | null>(null);
+  toggleTodoTrigger = signal<{ id: number; completed: boolean } | null>(null);
 
   // Build the API URL with json-server filtering
   // json-server supports title_like for partial string matching
@@ -53,6 +53,15 @@ export class ResourceComponent {
     { requireSync: false }
   );
 
+  // Convert toggle trigger signal to observable, then switchMap to HTTP call
+  toggleTodoResult = toSignal(
+    toObservable(this.toggleTodoTrigger).pipe(
+      filter((toggle): toggle is { id: number; completed: boolean } => toggle !== null),
+      switchMap((toggle) => this.resourceService.toggleTodo(toggle.id, toggle.completed))
+    ),
+    { requireSync: false }
+  );
+
   // Effect to reload todos after successful addition
   constructor() {
     effect(() => {
@@ -71,6 +80,15 @@ export class ResourceComponent {
         // Reload todos after successful deletion
         this.todos.reload();
         this.deleteTodoTrigger.set(null);
+      }
+    });
+
+    effect(() => {
+      const result = this.toggleTodoResult();
+      if (result) {
+        // Reload todos after successful toggle
+        this.todos.reload();
+        this.toggleTodoTrigger.set(null);
       }
     });
   }
@@ -104,13 +122,17 @@ export class ResourceComponent {
   }
 
   toggleTodo(id: number) {
-    this.resourceService
-      .toggleTodo(id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.todos.update(
-          (todos) => todos?.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)) ?? []
-        );
-      });
+    // Get current todo to determine the new completed state
+    const currentTodos = this.todos.value() ?? [];
+    const todo = currentTodos.find((t) => t.id === id);
+    if (!todo) return;
+
+    const newCompletedState = !todo.completed;
+
+    // Optimistically update the UI
+    this.todos.update((todos) => todos?.map((t) => (t.id === id ? { ...t, completed: newCompletedState } : t)) ?? []);
+
+    // Trigger the toggle todo operation
+    this.toggleTodoTrigger.set({ id, completed: newCompletedState });
   }
 }

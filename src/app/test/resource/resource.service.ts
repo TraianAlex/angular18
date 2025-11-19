@@ -22,7 +22,7 @@ export class ResourceService {
     return this.http.delete<any>(`${environment.apiTodosUrl}/${id}`);
   }
 
-  toggleTodo(id: number) {
-    return this.http.put<any>(`${environment.apiTodosUrl}/${id}`, { completed: true });
+  toggleTodo(id: number, completed: boolean) {
+    return this.http.patch<any>(`${environment.apiTodosUrl}/${id}`, { completed });
   }
 }

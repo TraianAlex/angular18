@@ -4,8 +4,8 @@ import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal, W
 import { SignalService } from '../signal.service';
 
 export type User = {
-  name: string;
-  age: number;
+  readonly name: string;
+  readonly age: number;
 };
 
 @Component({
@@ -100,12 +100,12 @@ export class Signals1Component implements OnInit {
 
   mutateAge() {
     const user = this.user();
-    user.age = Math.floor(Math.random() * 70 + 20);
+    // user.age = Math.floor(Math.random() * 70 + 20);
   }
 
   mutateAgeAndSet() {
     const user = this.user();
-    user.age = Math.floor(Math.random() * 70 + 20);
+    //user.age = Math.floor(Math.random() * 70 + 20);
     this.user.set(user);
   }
 }

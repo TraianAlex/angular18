@@ -1,0 +1,55 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "Learn Angular Signals",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Build a Todo App",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "title": "Master Reactive Programming",
+      "completed": true
+    },
+    {
+      "id": 4,
+      "title": "Implement HTTP Client",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "title": "Study Component Lifecycle",
+      "completed": true
+    },
+    {
+      "id": 6,
+      "title": "Practice Dependency Injection",
+      "completed": false
+    },
+    {
+      "id": 7,
+      "title": "Learn RxJS Operators",
+      "completed": false
+    },
+    {
+      "id": 8,
+      "title": "Build Custom Directives",
+      "completed": true
+    },
+    {
+      "id": 9,
+      "title": "Implement Form Validation",
+      "completed": false
+    },
+    {
+      "id": 10,
+      "title": "Deploy Application",
+      "completed": false
+    }
+  ]
+}
+

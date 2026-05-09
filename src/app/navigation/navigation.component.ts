@@ -3,7 +3,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-navigation',
-    standalone: true,
     imports: [RouterLink, RouterLinkActive],
     templateUrl: './navigation.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -9,7 +9,6 @@ export interface Todo {
 
 @Component({
   selector: 'app-todos',
-  standalone: true,
   imports: [FormsModule],
   templateUrl: './todos.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

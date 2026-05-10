@@ -14,14 +14,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     <div class="star-container">
       <div [class.disabled]="isDisabled()">
         <label>
-          How do you feel? @if (required()) {
+          How do you feel?
           <span class="font-bold text-red-500 mr-2">*</span>
-          }
         </label>
         @for (emoji of reactions; track emoji) {
-        <button (click)="select(emoji)" [disabled]="isDisabled()">
-          {{ emoji }}
-        </button>
+          <button (click)="select(emoji)" [disabled]="isDisabled()">
+            {{ emoji }}
+          </button>
         }
       </div>
       <div class="text-2xl">
@@ -35,11 +34,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class ReactionPickerComponent implements ControlValueAccessor {
   readonly value = signal<string>('');
-  disabled = input<boolean>(false);
-  required = input<boolean>(false);
-
-  private readonly disabledFromForm = signal(false);
-  protected readonly isDisabled = computed(() => this.disabled() || this.disabledFromForm());
+  readonly isDisabled = signal(false);
 
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
@@ -59,7 +54,7 @@ export class ReactionPickerComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabledFromForm.set(isDisabled);
+    this.isDisabled.set(isDisabled);
   }
 
   select(emoji: string): void {

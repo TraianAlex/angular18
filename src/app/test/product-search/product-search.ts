@@ -120,6 +120,7 @@ export class ProductSearchComponent {
       return matchesSearch && matchesCategory;
     });
   });
+
   constructor() {
     // Load initial data
     effect(() => {
@@ -128,6 +129,7 @@ export class ProductSearchComponent {
       });
     });
   }
+
   toggleCategory(category: string) {
     const current = this.selectedCategories();
     if (current.includes(category)) {

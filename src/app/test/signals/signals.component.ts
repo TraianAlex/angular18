@@ -2,11 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Signals2Component } from '../signals2/signals2.component';
 
-export type User = {
-  name: string;
-  age: number;
-};
-
 @Component({
   selector: 'app-signals',
   imports: [Signals2Component],
@@ -19,7 +14,6 @@ export class SignalsComponent {
   eventReceived() {
     this.clicks++;
   }
-
   // bug: this is not a signal
   user = {
     name: 'Alice',
@@ -30,7 +24,6 @@ export class SignalsComponent {
     const i = Math.floor(Math.random() * names.length);
     this.user.name = names[i];
   }
-
   // updateAge() {
   //   this.user.age = Math.floor(Math.random() * 20 + 20);
   // }

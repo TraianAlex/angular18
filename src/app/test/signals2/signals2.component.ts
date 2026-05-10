@@ -7,12 +7,9 @@ import {
   ElementRef,
   input,
   output,
-  signal,
   viewChild,
 } from '@angular/core';
 import { outputToObservable } from '@angular/core/rxjs-interop';
-
-import { Book } from '../../models/types';
 
 @Component({
   selector: 'app-signals2',
@@ -28,26 +25,11 @@ export class Signals2Component {
   // outputToObservable() turns an OutputRef (the new object returned by the output() function) into an Observable
   greetingClicked$ = outputToObservable(this.greetingClicked);
 
-  greeting = computed(() => 'Hello ' + this.name());
-
-  book = signal<Book>({
-    title: 'Angular Core Deep Dive',
-    synopsis: 'A deep dive into the core features of Angular.',
-  });
+  greeting = computed(() => this.name());
 
   constructor() {
     effect(() => {
       console.log('Title: ', this.title()?.nativeElement);
-    });
-  }
-
-  // deleteBook output emits the book when it's deleted
-  deleteBook = output<Book>();
-
-  deleteBookHandler() {
-    this.book.set({
-      title: '',
-      synopsis: '',
     });
   }
 }

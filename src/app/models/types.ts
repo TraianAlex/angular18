@@ -5,8 +5,3 @@ export type UserData = {
   name: string;
   email: string;
 };
-
-export type Book = {
-  title: string;
-  synopsis: string;
-};

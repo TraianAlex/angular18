@@ -10,34 +10,11 @@ import { User } from '../../models/types';
   templateUrl: './signals1.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Signals1Component implements OnInit {
+export class Signals1Component {
   signalService = inject(SignalService);
 
   count = this.signalService.count;
   userLoggedIn = this.signalService.userLoggedIn;
-  orderStatus = this.signalService.orderStatus;
-
-  cartItemsSignal = signal<string[]>([]);
-  myObject = signal(
-    {
-      name: 'name1',
-    },
-    {
-      equal: (a: { name: any }, b: { name: any }) => a.name === b.name,
-    },
-  );
-
-  ngOnInit(): void {
-    // When user logs in, add dependency on user data (simulated by userDataSignal)
-    computed(() => {
-      if (this.userLoggedIn()) {
-        // Add dependency
-      } else {
-        // Remove dependency }
-      }
-    });
-    this.cartItemsSignal.update((items) => [...this.cartItemsSignal(), 'bread']);
-  }
 
   doubleCountValue = computed(() => {
     return this.count() * 2;
@@ -46,15 +23,6 @@ export class Signals1Component implements OnInit {
   incrementCount() {
     this.signalService.incrementCount();
   }
-
-  // Create a computed signal (derived from order status) for food preparation
-  prepareFoodValue = computed(() => {
-    return this.orderStatus() === 'placed' ? 'preparing' : 'idle';
-  });
-
-  showProfileValue = computed(() => {
-    return this.userLoggedIn() ? 'Yes' : 'No';
-  });
 
   user = signal<User>({
     name: 'Alice',
@@ -79,17 +47,6 @@ export class Signals1Component implements OnInit {
         age: Math.floor(Math.random() * 70 + 20),
       }));
     }, 1);
-  }
-
-  mutateAge() {
-    const user = this.user();
-    // user.age = Math.floor(Math.random() * 70 + 20);
-  }
-
-  mutateAgeAndSet() {
-    const user = this.user();
-    //user.age = Math.floor(Math.random() * 70 + 20);
-    this.user.set(user);
   }
 }
 

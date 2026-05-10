@@ -5,3 +5,8 @@ export type UserData = {
   name: string;
   email: string;
 };
+
+export type User = {
+  readonly name: string;
+  readonly age: number;
+};

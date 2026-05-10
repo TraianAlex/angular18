@@ -13,17 +13,6 @@ export class SignalService {
   userLoggedInSignal = signal<boolean>(false);
   userLoggedIn = this.userLoggedInSignal.asReadonly();
 
-  mySignal: WritableSignal<{ foo: string }> = signal({ foo: 'bar' });
-  mySign = this.mySignal.asReadonly();
-  setNewValueSignal() {
-    this.mySignal.set({ foo: 'bar1' });
-  }
-
-  updateValueSignal() {
-    const currentValue = this.mySignal();
-    this.mySignal.set({ ...currentValue, foo: currentValue.foo + 'x' });
-  }
-
   orderStatusSignal = signal<OrderStatus>('placed');
   orderStatus = this.orderStatusSignal.asReadonly();
 
@@ -62,7 +51,7 @@ export class SignalService {
   }
 
   sendSignal(): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/signal', this.mySignal);
+    return this.http.post<any>('http://localhost:3000/signal', this.myObject);
   }
 
   receiveSignal(): Observable<any> {

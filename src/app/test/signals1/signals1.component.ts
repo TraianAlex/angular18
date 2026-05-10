@@ -2,11 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 
 import { SignalService } from '../signal.service';
-
-export type User = {
-  readonly name: string;
-  readonly age: number;
-};
+import { User } from '../../models/types';
 
 @Component({
   selector: 'app-signals1',
@@ -20,7 +16,6 @@ export class Signals1Component implements OnInit {
   count = this.signalService.count;
   userLoggedIn = this.signalService.userLoggedIn;
   orderStatus = this.signalService.orderStatus;
-  mySignal = this.signalService.mySign;
 
   cartItemsSignal = signal<string[]>([]);
   myObject = signal(
@@ -29,7 +24,7 @@ export class Signals1Component implements OnInit {
     },
     {
       equal: (a: { name: any }, b: { name: any }) => a.name === b.name,
-    }
+    },
   );
 
   ngOnInit(): void {
@@ -42,14 +37,6 @@ export class Signals1Component implements OnInit {
       }
     });
     this.cartItemsSignal.update((items) => [...this.cartItemsSignal(), 'bread']);
-  }
-
-  setNewValue() {
-    this.signalService.setNewValueSignal();
-  }
-
-  updateValue() {
-    this.signalService.updateValueSignal();
   }
 
   doubleCountValue = computed(() => {
@@ -67,10 +54,6 @@ export class Signals1Component implements OnInit {
 
   showProfileValue = computed(() => {
     return this.userLoggedIn() ? 'Yes' : 'No';
-  });
-
-  areObjectsEqual = computed(() => {
-    return this.myObject() === this.mySignal;
   });
 
   user = signal<User>({

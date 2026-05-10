@@ -1,4 +1,36 @@
 {
+  "products": [
+    {
+      "id": 1,
+      "name": "Wireless Headphones",
+      "category": "Electronics"
+    },
+    {
+      "id": 2,
+      "name": "Cotton T-Shirt",
+      "category": "Clothing"
+    },
+    {
+      "id": 3,
+      "name": "Angular Cookbook",
+      "category": "Books"
+    },
+    {
+      "id": 4,
+      "name": "USB-C Cable",
+      "category": "Electronics"
+    },
+    {
+      "id": 5,
+      "name": "Denim Jacket",
+      "category": "Clothing"
+    },
+    {
+      "id": 6,
+      "name": "TypeScript Handbook",
+      "category": "Books"
+    }
+  ],
   "todos": [
     {
       "id": 2,

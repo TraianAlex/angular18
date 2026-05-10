@@ -1,3 +1,4 @@
+import { ProductSearchComponent } from './test/product-search/product-search';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -15,8 +16,8 @@ export const routes: Routes = [
         loadComponent: () => import('./test/signals1/signals1.component').then((m) => m.Signals1Component),
       },
       {
-        path: 'signals2',
-        loadComponent: () => import('./test/signals2/signals2.component').then((m) => m.Signals2Component),
+        path: 'product-search',
+        loadComponent: () => import('./test/product-search/product-search').then((m) => m.ProductSearchComponent),
       },
       {
         path: 'resource',

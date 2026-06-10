@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { inject, Service } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 export type Todo = {
   id: string;
@@ -7,25 +8,23 @@ export type Todo = {
   completed: boolean;
 };
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class TodosService {
   private http = inject(HttpClient);
 
   getTodosX() {
-    return this.http.get<Todo[]>('http://localhost:3000/api/todos-x');
+    return httpResource<Todo[]>(() => `${environment.apiUrl}/todos-x`);
   }
 
   addTodo(todo: Todo) {
-    return this.http.post<Todo>('http://localhost:3000/api/todos-x', todo);
+    return this.http.post<Todo>(`${environment.apiUrl}/todos-x`, todo);
   }
 
   deleteTodo(id: string) {
-    return this.http.delete<void>(`http://localhost:3000/api/todos-x/${id}`);
+    return this.http.delete<void>(`${environment.apiUrl}/todos-x/${id}`);
   }
 
   toggleTodo(id: string, completed: boolean) {
-    return this.http.patch<void>(`http://localhost:3000/api/todos-x/${id}`, { completed });
+    return this.http.patch<void>(`${environment.apiUrl}/todos-x/${id}`, { completed });
   }
 }

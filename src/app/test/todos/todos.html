@@ -14,15 +14,20 @@
   <div class="mt-5">
     <p>{{ todosForm().value() | json }}</p>
   </div>
-  <ul class="list-disc list-inside mt-5">
-    @for (todo of todos(); track todo.id) {
-    <li>
+  <div class="list-disc list-inside mt-5">
+    <div class="text-sm text-gray-600">
+      <span class="font-medium">{{ completedCount() }}</span> of
+      <span class="font-medium">{{ todos.value()?.length ?? 0 }}</span> tasks completed
+    </div>
+    @for (todo of todos.value() ?? []; track todo.id) {
+    <div class="grid grid-cols-4 gap-1 items-center border border-gray-300 rounded-md p-2">
+      <input type="checkbox" [checked]="todo.completed" (change)="toggleTodo(todo.id)" />
       {{ todo.title }}
       <button (click)="toggleTodo(todo.id)" class="text-white rounded-md p-2">
         {{ todo.completed ? '✅' : '❌' }}
       </button>
       <button (click)="deleteTodo(todo.id)" class="bg-red-500 text-white rounded-md p-2">Delete</button>
-    </li>
+    </div>
     }
-  </ul>
+  </div>
 </div>

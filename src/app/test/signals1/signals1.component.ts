@@ -1,14 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 
 import { SignalService } from '../signal.service';
 import { User } from '../../models/types';
 
 @Component({
   selector: 'app-signals1',
-  imports: [CommonModule],
   templateUrl: './signals1.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Signals1Component {
   signalService = inject(SignalService);

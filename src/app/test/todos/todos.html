@@ -1,0 +1,28 @@
+<div class="max-w-2xl mx-auto p-6">
+  <form [formRoot]="todosForm">
+    <input type="checkbox" [formField]="todosForm.completed" />
+    <input type="text" class="border border-gray-300 rounded-md p-2" [formField]="todosForm.title" />
+    @if (todosForm.title().invalid() && todosForm.title().touched()) {
+    <div class="text-red-500 mt-2">
+      @for (error of todosForm.title().errors(); track error.kind) {
+      <p>{{ error.message }}</p>
+      }
+    </div>
+    }
+    <button type="submit" class="bg-blue-500 text-white rounded-md p-2" [disabled]="todosForm().invalid()">Add</button>
+  </form>
+  <div class="mt-5">
+    <p>{{ todosForm().value() | json }}</p>
+  </div>
+  <ul class="list-disc list-inside mt-5">
+    @for (todo of todos(); track todo.id) {
+    <li>
+      {{ todo.title }}
+      <button (click)="toggleTodo(todo.id)" class="text-white rounded-md p-2">
+        {{ todo.completed ? '✅' : '❌' }}
+      </button>
+      <button (click)="deleteTodo(todo.id)" class="bg-red-500 text-white rounded-md p-2">Delete</button>
+    </li>
+    }
+  </ul>
+</div>

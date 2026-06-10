@@ -23,6 +23,10 @@ export const routes: Routes = [
         path: 'resource',
         loadComponent: () => import('./test/resource/resource.component').then((m) => m.ResourceComponent),
       },
+      {
+        path: 'todos-x',
+        loadComponent: () => import('./test/todos/todos').then((m) => m.TodosXComponent),
+      },
     ],
   },
   {

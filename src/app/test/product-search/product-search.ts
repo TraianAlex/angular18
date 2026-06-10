@@ -5,7 +5,6 @@ import { Product } from '../../models/types';
 @Component({
   selector: 'app-product-search',
   templateUrl: './product-search.html',
-  standalone: true,
 })
 export class ProductSearchComponent {
   private productService = inject(ProductService);

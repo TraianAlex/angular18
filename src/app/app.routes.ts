@@ -62,6 +62,17 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'movies',
+    loadComponent: () => import('./movies/movies').then((m) => m.Movies),
+    children: [
+      {
+        path: '',
+        redirectTo: 'movies',
+        pathMatch: 'full',
+      },
+    ],
+  },
+  {
     path: '**',
     redirectTo: '',
   },

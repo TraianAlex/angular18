@@ -80,23 +80,8 @@
   ],
   "todos-x": [
     {
-      "id": 1,
-      "title": "Todo X 1",
-      "completed": true
-    },
-    {
-      "id": 3,
-      "title": "Todo X 3",
-      "completed": false
-    },
-    {
-      "id": "9b6c7acc-7a46-423a-ac4a-4b9cb1e4df8a",
-      "title": "kkkkk",
-      "completed": true
-    },
-    {
-      "id": "039fe9f8-d244-4934-b424-d80d0527e479",
-      "title": "sdfsfsdfsdf",
+      "id": "7f2fa31a-b8e4-4df6-9d9a-c202c5c38831",
+      "title": "aaaaa",
       "completed": false
     }
   ]

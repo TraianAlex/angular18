@@ -27,10 +27,11 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular/build": "^22.0.0",
+    "@angular/build": "^22.0.1",
     "@angular/cli": "^22.0.0",
     "@angular/compiler-cli": "^22.0.0",
     "@types/jasmine": "~5.1.0",
+    "baseline-browser-mapping": "^2.10.36",
     "concurrently": "^9.2.1",
     "istanbul-lib-instrument": "^6.0.3",
     "jasmine-core": "~5.1.0",
@@ -40,6 +41,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.5.3",
     "typescript": "~6.0.3"
   }
 }

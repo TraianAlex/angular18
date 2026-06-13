@@ -1,4 +1,4 @@
-<div class="movie-item">
+<div [appHighlight]="color" defaultColor="violet" class="movie-item mb-2">
   <div>
     <h4>{{ movie().title }}</h4>
     <small class="subtitle">
@@ -7,5 +7,11 @@
       <span>Duration: {{ movie().duration }} min</span>
     </small>
   </div>
-  <button>Details</button>
+  <button (click)="toggleDetails()">{{ showDetails() ? 'Hide details' : 'Details' }}</button>
 </div>
+<hr>
+@if (showDetails() && movieDetails()) {
+  <div>
+    <p *select="let data; from: movieDetails">The data is: {{ data.summary }}</p><hr>
+  </div>
+}

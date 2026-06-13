@@ -1,9 +1,14 @@
 import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withXhr } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { mockingInterceptor } from './movies/utils/data';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZonelessChangeDetection(), provideRouter(routes), provideHttpClient(withXhr())],
+  providers: [
+    provideZonelessChangeDetection(),
+    provideRouter(routes),
+    provideHttpClient(withXhr(), withInterceptors([mockingInterceptor])),
+  ],
 };

@@ -27,6 +27,10 @@ export const routes: Routes = [
         path: 'todos-x',
         loadComponent: () => import('./test/todos/todos').then((m) => m.TodosXComponent),
       },
+      {
+        path: 'directives',
+        loadComponent: () => import('./test/directives/directives').then((m) => m.DirectivesComponent),
+      },
     ],
   },
   {

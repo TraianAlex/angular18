@@ -20,3 +20,23 @@
     <span class="text-sm text-gray-500">Detected from: {{ cardNumber() || 'no input yet' }}</span>
   </div>
 </div>
+
+<div class="bg-white rounded-lg shadow-md border border-gray-200 p-6 mt-6">
+  <h2 class="text-xl font-semibold text-gray-800 mb-2">Active button directive</h2>
+  <p class="text-sm text-gray-600 mb-6">
+    The button starts active. Click it to deactivate — the directive removes the <code>isActive</code> class and
+    disables the button. Use Re-activate to enable it again.
+  </p>
+
+  <div class="flex flex-wrap items-center gap-4">
+    <button type="button" [isActive]="isActive()" (click)="toggleActive()" appSample2>
+      {{ isActive() ? 'Click to deactivate' : 'Inactive' }}
+    </button>
+    @if (!isActive()) {
+    <button type="button" class="text-sm font-medium text-blue-600 hover:text-blue-800" (click)="isActive.set(true)">
+      Re-activate
+    </button>
+    }
+    <span class="text-sm text-gray-500"> State: <strong>{{ isActive() ? 'active' : 'inactive' }}</strong> </span>
+  </div>
+</div>

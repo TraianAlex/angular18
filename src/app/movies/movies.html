@@ -1,5 +1,11 @@
 <div class="container">
   @for (movie of movies(); track movie.id) {
-  <app-movie-item [movie]="movie" [appHighlight]="color" defaultColor="violet" />
+  <app-movie-item
+    [movie]="movie"
+    [appHighlight]="color"
+    defaultColor="violet"
+    [isFavorite]="favoritesService.isFavorite(movie)"
+    (toggleFavorite)="favoritesService.toggleFavorite(movie)"
+  />
   }
 </div>

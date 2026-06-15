@@ -1,17 +1,21 @@
 <div class="movie-item mb-2">
   <div>
-    <h4>{{ movie().title }}</h4>
+    <h4>
+      <span class="icon-star" [class.active]="isFavorite()" (click)="toggleFavorite.emit(movie())"></span>
+      {{ movie().title }}
+    </h4>
     <small class="subtitle">
       <span>Release date: {{ movie().release_date }}</span>
-      <span>Budget: $ {{ movie().budget }} million</span>
-      <span>Duration: {{ movie().duration }} min</span>
+      <span>Budget: {{ movie().budget | millionDollar }}</span>
+      <span>Duration: {{ movie().duration | minToDuration }}</span>
     </small>
   </div>
   <button (click)="toggleDetails()">{{ showDetails() ? 'Hide details' : 'Details' }}</button>
 </div>
-<hr>
+<hr />
 @if (showDetails() && movieDetails()) {
-  <div>
-    <p *select="let data; from: movieDetails">The data is: {{ data.summary }}</p><hr>
-  </div>
+<div>
+  <p *select="let data; from: movieDetails">The data is: {{ data.summary }}</p>
+  <hr />
+</div>
 }

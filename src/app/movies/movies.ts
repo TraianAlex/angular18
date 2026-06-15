@@ -1,8 +1,9 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, inject, Signal, effect } from '@angular/core';
 import { Movie } from './model/movie.model';
 import { MovieItem } from './movie-item/movie-item';
 import { MoviesService } from './services/movies.service';
 import { HighlightDirective } from '../shared/directives/highlight/highlight.directive';
+import { FavoritesService } from './services/favorites.service';
 
 @Component({
   selector: 'app-movie',
@@ -12,6 +13,11 @@ import { HighlightDirective } from '../shared/directives/highlight/highlight.dir
 })
 export class Movies {
   protected movies: Signal<Movie[]> = inject(MoviesService).getMovies();
+  protected favoritesService = inject(FavoritesService);
+
+  // readonly testEff = effect(() => {
+  //   console.log('favorites', this.favoritesService.favorites());
+  // });
 
   color = '#ccc';
   

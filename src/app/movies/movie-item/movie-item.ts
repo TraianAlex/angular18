@@ -4,13 +4,12 @@ import { SelectDirective } from '../../shared/directives/select/select.directive
 import { MoviesService } from '../services/movies.service';
 import { take } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { HighlightDirective } from '../../shared/directives/highlight/highlight.directive';
 
 @Component({
   selector: 'app-movie-item',
   templateUrl: './movie-item.html',
   styleUrl: './movie-item.scss',
-  imports: [SelectDirective, HighlightDirective],
+  imports: [SelectDirective],
 })
 export class MovieItem {
   protected destroyRef = inject(DestroyRef);
@@ -20,8 +19,6 @@ export class MovieItem {
 
   protected movieDetails = signal<MovieDetails | undefined>(undefined);
   protected showDetails = signal(false);
-
-  color = '#ccc';
 
   toggleDetails() {
     this.showDetails.update((show) => !show);

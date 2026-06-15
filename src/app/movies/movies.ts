@@ -2,15 +2,18 @@ import { Component, inject, Signal } from '@angular/core';
 import { Movie } from './model/movie.model';
 import { MovieItem } from './movie-item/movie-item';
 import { MoviesService } from './services/movies.service';
+import { HighlightDirective } from '../shared/directives/highlight/highlight.directive';
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movies.html',
   styleUrl: './movies.scss',
-  imports: [MovieItem],
+  imports: [MovieItem, HighlightDirective],
 })
 export class Movies {
   protected movies: Signal<Movie[]> = inject(MoviesService).getMovies();
+
+  color = '#ccc';
   
   // movie: Movie = {
   //   id: 'e80d5a37-620e-4be2-92b9-fb1f5262494f',

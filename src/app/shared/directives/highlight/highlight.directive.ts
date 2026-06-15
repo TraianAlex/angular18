@@ -16,8 +16,9 @@ export class HighlightDirective {
   onMouseEnter() {
     this.highlight(this.appHighlight() || this.defaultColor() || 'yellow');
   }
+
   onMouseLeave() {
-    this.highlight('transparent');
+    this.highlight('');
   }
 
   private highlight(color: string) {

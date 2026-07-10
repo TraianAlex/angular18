@@ -1,0 +1,129 @@
+.details {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+
+  img {
+    border-radius: 0.5rem;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.6;
+    color: #374151;
+
+    span:first-child {
+      font-weight: 600;
+      color: #111827;
+    }
+  }
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+}
+
+.horizontal {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 0.5rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  font-size: 0.875rem;
+  color: #111827;
+
+  caption {
+    caption-side: top;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    padding: 0 0 0.75rem;
+  }
+
+  thead {
+    background: #f3f4f6;
+
+    th {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #6b7280;
+      border-bottom: 1px solid #e5e7eb;
+    }
+  }
+
+  tbody td {
+    padding: 1rem;
+    vertical-align: top;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    line-height: 1.5;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover td {
+    background: #f9fafb;
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    flex-direction: column;
+  }
+
+  .horizontal {
+    thead {
+      display: none;
+    }
+
+    tbody,
+    tr,
+    td {
+      display: block;
+      width: 100%;
+    }
+
+    tbody tr {
+      padding: 0.5rem 0;
+    }
+
+    tbody td {
+      display: grid;
+      grid-template-columns: 8rem 1fr;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #f3f4f6;
+
+      &::before {
+        content: attr(data-label);
+        font-weight: 600;
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #6b7280;
+      }
+    }
+
+    tbody tr:last-child td:last-child {
+      border-bottom: none;
+    }
+  }
+}

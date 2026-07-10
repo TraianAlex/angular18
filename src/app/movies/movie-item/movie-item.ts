@@ -1,38 +1,36 @@
-import { Component, DestroyRef, inject, input, output, signal } from '@angular/core';
+import { Component, computed, inject, input, output, signal, Signal } from '@angular/core';
 import { Movie, MovieDetails } from '../model/movie.model';
-import { SelectDirective } from '../../shared/directives/select/select.directive';
+// import { SelectDirective } from '../../shared/directives/select/select.directive';
 import { MoviesService } from '../services/movies.service';
-import { take } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MillionDollarPipe } from '../../shared/pipes/million-dollar.pipe';
 import { MinToDurationPipe } from '../../shared/pipes/min-to-duration.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-movie-item',
   templateUrl: './movie-item.html',
   styleUrl: './movie-item.scss',
-  imports: [SelectDirective, MillionDollarPipe, MinToDurationPipe],
+  imports: [MillionDollarPipe, MinToDurationPipe, RouterLink],
 })
 export class MovieItem {
-  protected destroyRef = inject(DestroyRef);
   protected movieService = inject(MoviesService);
 
   movie = input.required<Movie>();
   isFavorite = input<boolean>(false);
   toggleFavorite = output<Movie>();
 
-  protected movieDetails = signal<MovieDetails | undefined>(undefined);
   protected showDetails = signal(false);
 
-  toggleDetails() {
-    this.showDetails.update((show) => !show);
-    if (this.showDetails()) {
-      this.movieService
-        .getMovieDetails(this.movie().id)
-        .pipe(take(1), takeUntilDestroyed(this.destroyRef))
-        .subscribe((details) => {
-          this.movieDetails.set(details);
-        });
-    }
-  }
+  /** Holds the Signal returned by the service (created once on first open). */
+  private detailsSource = signal<Signal<MovieDetails | undefined> | undefined>(undefined);
+
+  /** Unwrapped details for the template / select directive. */
+  protected movieDetails = computed(() => this.detailsSource()?.() ?? undefined);
+
+  // toggleDetails() {
+  //   this.showDetails.update((show) => !show);
+  //   if (this.showDetails() && !this.detailsSource()) {
+  //     this.detailsSource.set(this.movieService.getMovieDetails(this.movie().id));
+  //   }
+  // }
 }

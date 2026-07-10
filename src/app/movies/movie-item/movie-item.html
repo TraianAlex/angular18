@@ -10,12 +10,13 @@
       <span>Duration: {{ movie().duration | minToDuration }}</span>
     </small>
   </div>
-  <button (click)="toggleDetails()">{{ showDetails() ? 'Hide details' : 'Details' }}</button>
+  <!-- <button (click)="toggleDetails()">{{ showDetails() ? 'Hide details' : 'Details' }}</button> -->
+  <button [routerLink]="'details/'+ movie().id">Details</button>
 </div>
 <hr />
-@if (showDetails() && movieDetails()) {
+<!-- @if (showDetails() && movieDetails()) {
 <div>
   <p *select="let data; from: movieDetails">The data is: {{ data.summary }}</p>
   <hr />
 </div>
-}
+} -->

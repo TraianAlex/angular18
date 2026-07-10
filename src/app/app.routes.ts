@@ -67,12 +67,14 @@ export const routes: Routes = [
   },
   {
     path: 'movies',
-    loadComponent: () => import('./movies/movies').then((m) => m.Movies),
     children: [
       {
         path: '',
-        redirectTo: 'movies',
-        pathMatch: 'full',
+        loadComponent: () => import('./movies/movies').then((m) => m.Movies),
+      },
+      {
+        path: 'details/:id',
+        loadComponent: () => import('./movies/movie-details/movie-details').then((m) => m.MovieDetailsComponent),
       },
     ],
   },

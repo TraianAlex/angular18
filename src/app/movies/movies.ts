@@ -1,5 +1,4 @@
-import { Component, inject, Signal, effect } from '@angular/core';
-import { Movie } from './model/movie.model';
+import { Component, computed, inject, signal } from '@angular/core';
 import { MovieItem } from './movie-item/movie-item';
 import { MoviesService } from './services/movies.service';
 import { HighlightDirective } from '../shared/directives/highlight/highlight.directive';
@@ -12,20 +11,18 @@ import { FavoritesService } from './services/favorites.service';
   imports: [MovieItem, HighlightDirective],
 })
 export class Movies {
-  protected movies: Signal<Movie[]> = inject(MoviesService).getMovies();
+  private readonly moviesService = inject(MoviesService);
   protected favoritesService = inject(FavoritesService);
 
-  // readonly testEff = effect(() => {
-  //   console.log('favorites', this.favoritesService.favorites());
-  // });
+  private titleFilter = signal('');
+  private yearFilter = signal('');
+
+  protected movies = computed(() => this.moviesService.filterMovieList(this.titleFilter(), this.yearFilter()));
 
   color = '#ccc';
-  
-  // movie: Movie = {
-  //   id: 'e80d5a37-620e-4be2-92b9-fb1f5262494f',
-  //   title: "Harry Potter and the Philosopher's Stone",
-  //   duration: 152,
-  //   budget: 125,
-  //   release_date: '2001-11-04',
-  // };
+
+  filter(title: string, year: string) {
+    this.titleFilter.set(title);
+    this.yearFilter.set(year);
+  }
 }

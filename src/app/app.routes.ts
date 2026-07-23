@@ -67,6 +67,10 @@ export const routes: Routes = [
         path: 'toggle-switch',
         loadComponent: () => import('./star-rating/toggle-switch.component').then((m) => m.ToggleSwitchComponent),
       },
+      {
+        path: 'date-range-picker',
+        loadComponent: () => import('./star-rating/date-range-picker').then((m) => m.DateRangePicker),
+      },
     ],
   },
   {

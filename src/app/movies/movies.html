@@ -1,4 +1,37 @@
 <div class="container">
+  <form class="filters" (submit)="$event.preventDefault()">
+    <fieldset>
+      <legend>Filters</legend>
+      <div class="filters-grid">
+        <div class="field">
+          <label for="title">Title</label>
+          <input
+            #titleFilter
+            id="title"
+            type="search"
+            name="title"
+            placeholder="Search by title…"
+            autocomplete="off"
+            (input)="filter(titleFilter.value, yearFilter.value)"
+          />
+        </div>
+        <div class="field">
+          <label for="releaseDate">Release year</label>
+          <input
+            #yearFilter
+            id="releaseDate"
+            type="number"
+            name="releaseDate"
+            placeholder="e.g. 2001"
+            min="1900"
+            max="2100"
+            (input)="filter(titleFilter.value, yearFilter.value)"
+          />
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
   @for (movie of movies(); track movie.id) {
   <app-movie-item
     [movie]="movie"

@@ -14,3 +14,14 @@ export type Product = {
   name: string;
   category: string;
 };
+
+export interface ProductSearch2 {
+  id: number;
+  title: string;
+  price: number;
+  category: string;
+}
+
+export interface ProductSearch2Response {
+  products: ProductSearch2[];
+}

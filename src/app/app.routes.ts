@@ -20,6 +20,10 @@ export const routes: Routes = [
         loadComponent: () => import('./test/product-search/product-search').then((m) => m.ProductSearchComponent),
       },
       {
+        path: 'product-search2',
+        loadComponent: () => import('./test/product-search2/product-search2').then((m) => m.ProductSearch2),
+      },
+      {
         path: 'resource',
         loadComponent: () => import('./test/resource/resource.component').then((m) => m.ResourceComponent),
       },

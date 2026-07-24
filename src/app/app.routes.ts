@@ -87,6 +87,14 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'cars',
+    loadComponent: () => import('./cars/cars').then((m) => m.CarsComponent),
+    children: [
+      { path: '', redirectTo: 'step1', pathMatch: 'full' },
+      { path: 'step1', loadComponent: () => import('./cars/step1/step1.component').then((m) => m.Step1Component) },
+    ],
+  },
+  {
     path: '**',
     redirectTo: '',
   },

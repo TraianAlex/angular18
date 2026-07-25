@@ -35,6 +35,10 @@ export const routes: Routes = [
         path: 'directives',
         loadComponent: () => import('./test/directives/directives').then((m) => m.DirectivesComponent),
       },
+      {
+        path: 'playground',
+        loadComponent: () => import('./test/playground/playground').then((m) => m.PlaygroundComponent),
+      },
     ],
   },
   {

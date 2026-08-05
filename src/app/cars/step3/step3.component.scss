@@ -1,0 +1,71 @@
+.step3 {
+  color: #fff;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+h2 {
+  margin: 0 0 1.75rem;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: #fff;
+}
+
+.summary {
+  max-width: 40rem;
+}
+
+.summary-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.summary-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+
+  strong {
+    font-weight: 700;
+    color: #fff;
+  }
+}
+
+.summary-meta {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #e5e7eb;
+}
+
+.summary-price {
+  flex-shrink: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.summary-divider {
+  margin: 0.25rem 0 1.25rem;
+  border: none;
+  border-top: 1px solid #fff;
+}
+
+.summary-row.total {
+  margin-bottom: 0;
+
+  .summary-label,
+  .summary-price {
+    font-size: 1.05rem;
+  }
+}

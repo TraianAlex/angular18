@@ -1,0 +1,54 @@
+<section class="step3">
+  <h1>Step 3: Summary</h1>
+  <h2>Your Tesla {{ service.currentCar()?.description }}</h2>
+
+  <div class="summary">
+    @if (service.currentConfig(); as config) {
+      <div class="summary-row">
+        <div class="summary-label">
+          <strong>{{ config.description }}</strong>
+          <span class="summary-meta">Range: {{ config.range }} miles - Max speed: {{ config.speed }}</span>
+        </div>
+        <div class="summary-price">{{ config.price | currency }}</div>
+      </div>
+    }
+
+    @if (service.currentColor(); as color) {
+      <div class="summary-row">
+        <div class="summary-label">
+          <strong>{{ color.description }} Color</strong>
+        </div>
+        <div class="summary-price">{{ color.price | currency }}</div>
+      </div>
+    }
+
+    @if (service.currentWheelIsYoke()) {
+      <div class="summary-row">
+        <div class="summary-label">
+          <strong>Yoke Steering Wheel</strong>
+        </div>
+        <div class="summary-price">{{ 1000 | currency }}</div>
+      </div>
+    }
+
+    @if (service.currentTowHitchIsSelected()) {
+      <div class="summary-row">
+        <div class="summary-label">
+          <strong>Tow Hitch Package</strong>
+        </div>
+        <div class="summary-price">{{ 1000 | currency }}</div>
+      </div>
+    }
+
+    <hr class="summary-divider" />
+
+    <div class="summary-row total">
+      <div class="summary-label">
+        <strong>TOTAL COST</strong>
+      </div>
+      <div class="summary-price">
+        <strong>{{ service.totalCost() | currency }}</strong>
+      </div>
+    </div>
+  </div>
+</section>

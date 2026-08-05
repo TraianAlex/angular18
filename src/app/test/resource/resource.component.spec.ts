@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResourceComponent } from './resource.component';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 describe('ResourceComponent', () => {
   let component: ResourceComponent;

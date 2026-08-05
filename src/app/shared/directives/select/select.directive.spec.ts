@@ -1,8 +1,18 @@
+import { TemplateRef, ViewContainerRef } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { describe, expect, it } from 'vitest';
 import { SelectDirective } from './select.directive';
 
 describe('SelectDirective', () => {
   it('should create an instance', () => {
-    const directive = new SelectDirective();
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: TemplateRef, useValue: {} },
+        { provide: ViewContainerRef, useValue: { createEmbeddedView: () => undefined } },
+      ],
+    });
+
+    const directive = TestBed.runInInjectionContext(() => new SelectDirective());
     expect(directive).toBeTruthy();
   });
 });

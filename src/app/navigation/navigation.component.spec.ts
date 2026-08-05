@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
 import { NavigationComponent } from './navigation.component';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;

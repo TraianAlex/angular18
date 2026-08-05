@@ -23,12 +23,4 @@
       </label>
     }
   </div>
-
-  <div class="preview">
-    @if (service.currentImage()) {
-      <img [src]="service.currentImage()" [alt]="service.currentCar()?.description ?? 'Selected car'" />
-    } @else {
-      <p class="preview-placeholder">Select a model to preview</p>
-    }
-  </div>
 </section>

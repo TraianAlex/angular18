@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ConfiguratorService } from './configurator.service';
 
 @Component({
   selector: 'app-cars',
@@ -7,4 +8,6 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './cars.scss',
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
 })
-export class CarsComponent {}
+export class CarsComponent {
+  service = inject(ConfiguratorService);
+}

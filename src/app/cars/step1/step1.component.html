@@ -5,9 +5,11 @@
     <label class="control">
       <span>Model:</span>
       <select #model (change)="service.selectModel(model.value)">
-        <option value="">Choose...</option>
+        <option value="0">Choose...</option>
         @for (model of service.allModels(); track model.code) {
-          <option [value]="model.code">{{ model.description }}</option>
+          <option [value]="model.code" [selected]="model.code === service.currentCar()?.code">
+            {{ model.description }}
+          </option>
         }
       </select>
     </label>
@@ -17,7 +19,9 @@
         <span>Color:</span>
         <select #color [value]="service.currentColor()?.code" (change)="service.selectColor(color.value)">
           @for (color of service.selectableColors(); track color.code) {
-            <option [value]="color.code">{{ color.description }}</option>
+            <option [value]="color.code" [selected]="color.code === service.currentColor()?.code">
+              {{ color.description }}
+            </option>
           }
         </select>
       </label>

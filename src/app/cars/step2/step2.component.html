@@ -5,9 +5,11 @@
     <label class="control">
       <span>Config:</span>
       <select #config (change)="service.selectConfig(config.value)">
-        <option value="">Choose...</option>
+        <option value="0">Choose...</option>
         @for (config of service.selectableOptions()?.configs; track config.id) {
-          <option [value]="config.id">{{ config.description }}</option>
+          <option [value]="config.id" [selected]="config.id === service.currentConfig()?.id">
+            {{ config.description }}
+          </option>
         }
       </select>
     </label>

@@ -9,7 +9,6 @@ import { MoviesService } from '../services/movies.service';
   selector: 'app-movie-details',
   templateUrl: 'movie-details.html',
   styleUrls: ['movie-details.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NgOptimizedImage, MillionDollarPipe, MinToDurationPipe],
 })
 export class MovieDetailsComponent {

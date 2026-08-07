@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 
 import { routes } from './app.routes';
-import { mockingInterceptor } from './movies/utils/data';
+import { mockingInterceptor } from './shared/utils/data';
 
 export const appConfig: ApplicationConfig = {
   providers: [

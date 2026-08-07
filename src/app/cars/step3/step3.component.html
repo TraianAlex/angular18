@@ -1,5 +1,8 @@
 <section class="step3">
-  <h1>Step 3: Summary</h1>
+  <h1>
+    Step 3: Summary <button type="button" class="button" (click)="reset()">Reset</button>
+    <button type="button" class="button" (click)="service.order()">Order</button>
+  </h1>
   <h2>Your Tesla {{ service.currentCar()?.description }}</h2>
 
   <div class="summary">

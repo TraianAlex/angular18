@@ -2,6 +2,7 @@ import { computed, effect, inject, Injectable, signal, Signal } from '@angular/c
 import { HttpClient } from '@angular/common/http';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CarModel, CarOptions, Color, Config } from './models.type';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -67,5 +68,25 @@ export class ConfiguratorService {
   selectConfig(id: string) {
     const config = this.selectableOptions()?.configs.find((c) => c.id === +id);
     this.currentConfig.set(config);
+  }
+
+  reset() {
+    this.currentCar.set(undefined);
+    this.currentColor.set(undefined);
+    this.currentConfig.set(undefined);
+    this.currentWheelIsYoke.set(false);
+    this.currentTowHitchIsSelected.set(false);
+  }
+
+  order() {
+    const order = {
+      car: this.currentCar()?.code,
+      color: this.currentColor()?.code,
+      config: this.currentConfig()?.id,
+      wheelIsYoke: this.currentWheelIsYoke(),
+      towHitchIsSelected: this.currentTowHitchIsSelected(),
+    };
+    console.log(order);
+    return of(order);
   }
 }

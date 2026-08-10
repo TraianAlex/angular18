@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  flex-direction: column;
+
+  div:first-child {
+    display: flex;
+  }
+}
+
+.tags {
+  display: flex;
+  gap: 1rem;
+  margin-left: calc(90px + calc(1.5 * 1rem));
+}
+
+.details {
+  margin-top: 1rem;
+
+  div {
+    span:first-child {
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.container {
+  max-width: 50rem;
+  padding: 1rem;
+}
+
+header {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .tabs {
+    display: flex !important;
+
+    button {
+      flex: 50%;
+
+      &.active {
+        font-weight: bold;
+        background: #333;
+        color: #fff;
+      }
+
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+}

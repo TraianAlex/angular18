@@ -105,6 +105,24 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'jobs',
+    loadComponent: () => import('./jobs/jobs').then((m) => m.JobsComponent),
+    children: [
+      {
+        path: 'list-jobs',
+        loadComponent: () => import('./jobs/pages/jobs/jobs.page').then((m) => m.JobsPage),
+      },
+      {
+        path: 'favorites',
+        loadComponent: () => import('./jobs/pages/favorites/favorites.page').then((m) => m.FavoritesPage),
+      },
+      {
+        path: 'job/:jobId',
+        loadComponent: () => import('./jobs/pages/job-details.page').then((m) => m.JobDetailsPage),
+      },
+    ],
+  },
+  {
     path: '**',
     redirectTo: '',
   },

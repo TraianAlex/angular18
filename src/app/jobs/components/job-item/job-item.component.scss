@@ -1,0 +1,26 @@
+h4 {
+  margin-left: 0;
+  margin-bottom: 0;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.subtitle {
+  display: flex;
+  gap: 1rem;
+}
+
+.job-item {
+  display: flex;
+  gap: 2rem;
+}
+
+img {
+  margin: auto;
+  height: 100%;
+  vertical-align: center;
+}

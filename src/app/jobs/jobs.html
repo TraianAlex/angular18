@@ -2,8 +2,8 @@
   <header>
     <h1>Find your job</h1>
     <div class="tabs">
-      <button routerLink="/jobs" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Jobs</button>
-      <button routerLink="/jobs/favorites" routerLinkActive="active">Favorites</button>
+      <button routerLink="/jobs" [class.active]="jobsTabActive()">Jobs</button>
+      <button routerLink="/jobs/favorites" [class.active]="favoritesTabActive()">Favorites</button>
     </div>
   </header>
   <router-outlet />

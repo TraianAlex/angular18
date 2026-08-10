@@ -10,7 +10,7 @@ import { JobDetails } from '../model/job.model';
   selector: 'app-jobs-details',
   template: `
     <div>
-      <button routerLink="/jobs/list-jobs" style="margin-left: 0"><span class="icon-home"></span>Back</button>
+      <button routerLink="/jobs" style="margin-left: 0"><span class="icon-home"></span>Back</button>
       @if ($job | async; as job) {
         <div>
           <app-job-details [job]="job" />

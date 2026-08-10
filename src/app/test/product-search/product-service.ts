@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { Product } from '../../models/types';
+import { Product } from '../models/types';
 
 @Injectable({
   providedIn: 'root',

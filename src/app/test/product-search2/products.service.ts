@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ProductSearch2Response } from '../../models/types';
+import { ProductSearch2Response } from '../models/types';
 import { environment } from '../../../environments/environment';
 import { shareReplay } from 'rxjs';
 

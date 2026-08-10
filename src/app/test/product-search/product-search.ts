@@ -1,6 +1,6 @@
 import { Component, inject, signal, computed, effect } from '@angular/core';
 import { ProductService } from './product-service';
-import { Product } from '../../models/types';
+import { Product } from '../models/types';
 
 @Component({
   selector: 'app-product-search',

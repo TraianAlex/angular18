@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 
 import { SignalService } from '../signal.service';
-import { User } from '../../models/types';
+import { User } from '../models/types';
 
 @Component({
   selector: 'app-signals1',

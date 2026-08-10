@@ -109,7 +109,7 @@ export const routes: Routes = [
     loadComponent: () => import('./jobs/jobs').then((m) => m.JobsComponent),
     children: [
       {
-        path: 'list-jobs',
+        path: '',
         loadComponent: () => import('./jobs/pages/jobs/jobs.page').then((m) => m.JobsPage),
       },
       {

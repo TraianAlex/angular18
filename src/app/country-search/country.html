@@ -1,0 +1,13 @@
+<div class="container">
+  <header>
+    <h1>Country Selection</h1>
+  </header>
+  <div class="dropdown" data-test="dropdown">
+    <input type="text" class="dropbtn" data-test="filter" placeholder="Enter country name" [formControl]="filter" />
+    <div class="dropdown-content">
+      @for (country of filteredCountries$ | async; track country.code) {
+      <span data-test="dropdown-item">{{ country.name }}</span>
+      }
+    </div>
+  </div>
+</div>

@@ -43,6 +43,10 @@ export const routes: Routes = [
         path: 'playground',
         loadComponent: () => import('./test/playground/playground').then((m) => m.PlaygroundComponent),
       },
+      {
+        path: 'country-search',
+        loadComponent: () => import('./country-search/country').then((m) => m.Country),
+      },
     ],
   },
   {

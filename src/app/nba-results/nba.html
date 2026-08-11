@@ -1,0 +1,16 @@
+<div class="container">
+  <header>
+    <h1>Basketball Results</h1>
+  </header>
+  @for (team of teams$ | async; track team.id) {
+  <button [attr.data-test]="team.abbreviation" (click)="selectTeam(team)">{{ team.full_name }}</button>
+  }
+
+  <div>
+    @if (teamSelected()) {
+    <app-team-stats [team]="teamSelected()!" [teamStats]="teamStats()" />
+    } @else {
+    <mark>No team selected</mark>
+    }
+  </div>
+</div>

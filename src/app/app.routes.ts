@@ -47,6 +47,10 @@ export const routes: Routes = [
         path: 'country-search',
         loadComponent: () => import('./country-search/country').then((m) => m.Country),
       },
+      {
+        path: 'nba',
+        loadComponent: () => import('./nba-results/nba').then((m) => m.Nba),
+      },
     ],
   },
   {

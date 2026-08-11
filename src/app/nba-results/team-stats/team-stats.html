@@ -1,0 +1,28 @@
+<div class="card">
+  <div>
+    <h3 data-test="teamName">{{ team().full_name }} [{{ team().abbreviation }}]</h3>
+    <h6 data-test="conference">{{ team().conference }}ern conference</h6>
+  </div>
+  <hr />
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <p>Results of last 5 games:</p>
+        <p data-test="results">
+          @for (result of teamStats().lastGames; track $index) {
+          <mark class="tag" [class.win]="result === 'W'" [class.loss]="result === 'L'">{{ result }}</mark>
+          }
+        </p>
+        <p>Avg pts scored: <strong data-test="avgScored">{{ teamStats().averagePointsScored }}</strong></p>
+        <p>Avg pts conceded: <strong data-test="avgConceded">{{ teamStats().averagePointsConceded }}</strong></p>
+      </div>
+      <div class="col-sm-6">
+        <img
+          data-test="logo"
+          [src]="'https://interstate21.com/nba-logos/' + team().abbreviation + '.png'"
+          [alt]="team().full_name"
+        />
+      </div>
+    </div>
+  </div>
+</div>

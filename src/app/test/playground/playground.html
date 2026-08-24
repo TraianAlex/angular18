@@ -1,4 +1,26 @@
 <div class="bg-white rounded-lg shadow-md border border-gray-200 p-6">
   <h2 class="text-xl font-semibold text-gray-800 mb-2">Playground</h2>
-  <p class="text-sm text-gray-600">Scratch space for trying out code. Add whatever you need here.</p>
+  <form [formRoot]="loginForm">
+    <input id="email" type="email" [formField]="loginForm.email" class="border border-gray-300 rounded-md p-2 me-2"/>
+    <input id="password" type="password" [formField]="loginForm.password" class="border border-gray-300 rounded-md p-2 me-2"/>
+    <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Login</button>
+  </form>  
+
+  <pre>{{ loginForm().value() | json }}</pre>
+  <pre>{{ model() | json }}</pre>
+
+  <form [formRoot]="orderForm" class="mt-4">
+    <label for="customerName" class="me-2">Customer</label>
+    <input id="customerName" type="text" [formField]="orderForm.customerName" class="border border-gray-300 rounded-md p-2 mb-2 me-2"/>
+    @for (item of orderForm.items; track item) {
+      <div class="mb-2">
+        <label for="product" class="me-2">Product</label>
+        <input id="product" type="text" [formField]="item.product" placeholder="Product" class="border border-gray-300 rounded-md p-2 me-2"/>
+        <label for="quantity" class="me-2">Quantity</label>
+        <input id="quantity" type="number" [formField]="item.quantity" placeholder="Quantity" class="border border-gray-300 rounded-md p-2 me-2"/>
+        <button type="button" (click)="removeItem($index)" class="bg-red-500 text-white rounded-md p-2">Remove</button>
+      </div>
+    }
+    <button type="button" (click)="addItem()" class="bg-green-500 text-white rounded-md p-2 mt-2">Add Item</button>
+  </form>
 </div>

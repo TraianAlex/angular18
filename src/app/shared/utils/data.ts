@@ -447,6 +447,16 @@ const MOCKS: Mock[] = [
       ];
     },
   },
+  {
+    path: createPathRegExp('/users'),
+    mockData: () => {
+      return {
+        id: '1',
+        name: 'John Doe',
+        email: 'john.doe@example.com',
+      };
+    },
+  }
 ];
 
 export function mockingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {

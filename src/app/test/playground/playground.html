@@ -1,13 +1,18 @@
 <div class="bg-white rounded-lg shadow-md border border-gray-200 p-6">
   <h2 class="text-xl font-semibold text-gray-800 mb-2">Playground</h2>
-  <form [formRoot]="loginForm">
+  @let email = loginForm.email();
+  <form [formRoot]="loginForm" [class.is-invalid]="loginForm.email().touched() && loginForm.email().invalid()">
     <input id="email" type="email" [formField]="loginForm.email" class="border border-gray-300 rounded-md p-2 me-2"/>
+    @if (email.touched() && email.invalid()) {
+      <p class="text-red-500">Invalid email</p>
+    }
     <input id="password" type="password" [formField]="loginForm.password" class="border border-gray-300 rounded-md p-2 me-2"/>
     <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Login</button>
   </form>  
 
   <pre>{{ loginForm().value() | json }}</pre>
   <pre>{{ model() | json }}</pre>
+  <pre>{{ email.value() }}</pre>
 
   <form [formRoot]="orderForm" class="mt-4">
     <label for="customerName" class="me-2">Customer</label>
@@ -21,6 +26,36 @@
         <button type="button" (click)="removeItem($index)" class="bg-red-500 text-white rounded-md p-2">Remove</button>
       </div>
     }
-    <button type="button" (click)="addItem()" class="bg-green-500 text-white rounded-md p-2 mt-2">Add Item</button>
+    <button type="button" (click)="addItem()" class="bg-green-500 text-white rounded-md p-2 mt-2 mb-2">Add Item</button>
+  </form>
+
+  <form [formRoot]="userForm" class="mt-4">
+    <div class="mb-2">
+      <label for="firstName" class="me-2">First Name</label>
+      <input id="firstName" type="text" [formField]="userForm.firstName" class="border border-gray-300 rounded-md p-2 mb-2 me-2"/>
+    </div>
+    <div class="mb-2">
+      <label for="lastName" class="me-2">Last Name</label>
+      <input id="lastName" type="text" [formField]="userForm.lastName" class="border border-gray-300 rounded-md p-2 mb-2 me-2"/>
+    </div>
+    <div class="mb-2">
+      @let addr = userForm.address;
+      <label for="address" class="me-2">Address</label>
+      <input id="address" type="text" [formField]="addr.street" class="border border-gray-300 rounded-md p-2 mb-2 me-2"/>
+      <label for="city" class="me-2">City</label>
+      <input id="city" type="text" [formField]="addr.city" class="border border-gray-300 rounded-md p-2 mb-2 me-2"/>
+      <label for="zip" class="me-2">Zip</label>
+      <input id="zip" type="text" [formField]="addr.zip" class="border border-gray-300 rounded-md p-2 mb-2 me-2"/>
+    </div>
+    <div class="mb-2">
+      <label for="cc" class="me-2">CC</label>
+      <input id="cc" type="text" [formField]="userForm.cc" class="border border-gray-300 rounded-md p-2 mb-2 me-2"/>
+    </div>
+    @if (userForm().submitting()) { 
+      <button type="submit" disabled class="bg-gray-500 text-white rounded-md p-2">Submitting...</button>
+    } @else {
+      <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Save</button>
+    }
+    <button type="submit" [disabled]="userForm().submitting()" (click)="onSave()" class="bg-blue-500 text-white rounded-md p-2 ms-2">Save Manually</button>
   </form>
 </div>

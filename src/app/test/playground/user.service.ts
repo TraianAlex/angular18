@@ -8,6 +8,7 @@ export interface UserInfo {
   lastName: string;
   address: {
     street: string;
+    country: string;
     city: string;
     zip: string;
   };

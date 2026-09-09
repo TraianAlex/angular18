@@ -1,6 +1,7 @@
 <div class="bg-white rounded-lg shadow-md border border-gray-200 p-6">
   <h2 class="text-xl font-semibold text-gray-800 mb-2">Playground</h2>
   @let email = loginForm.email();
+  @let password = loginForm.password();
   <form
     [formRoot]="loginForm"
     [class.is-invalid]="loginForm.email().touched() && loginForm.email().invalid()"
@@ -20,6 +21,9 @@
       [formField]="loginForm.password"
       class="border border-gray-300 rounded-md p-2 me-2"
     />
+     @if (password.touched() && password.invalid()) {
+      <p class="text-red-500">Invalid password</p>
+      }
     <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Login</button>
   </form>
 

@@ -25,6 +25,11 @@ export interface UserInfo {
   cc: string;
 }
 
+export interface LoginInfo {
+  email: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -32,6 +37,9 @@ export class UserService {
   private http = inject(HttpClient);
   private baseUrl = environment.apiUrl;
 
+  saveLoginInfo(loginInfo: LoginInfo): Promise<unknown> {
+    return firstValueFrom(this.http.post(`${this.baseUrl}/login`, loginInfo));
+  }
   saveUserInfo(userInfo: UserInfo): Promise<unknown> {
     return firstValueFrom(this.http.post(`${this.baseUrl}/users`, userInfo));
   }

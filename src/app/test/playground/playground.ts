@@ -14,12 +14,19 @@ import {
   applyWhenValue,
   min,
   applyEach,
+  validateStandardSchema,
 } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
+import * as z from 'zod';
 import { UserService } from './user.service';
 import { mustBeFromValidProvider } from './validators/cc-validator';
 import { validateCreditCardNumber } from './validators/credit-card-validator';
 import { Address, addressSchema } from './validators/address-schema-validation';
+
+const loginSchema = z.object({
+  email: z.email(),
+  password: z.string().min(8),
+});
 
 interface LineItem {
   product: string;
@@ -67,7 +74,27 @@ export class PlaygroundComponent {
   userService = inject(UserService);
 
   model = signal<{ email: string; password: string }>({ email: '', password: '' });
-  loginForm = form(this.model);
+  loginForm = form(
+    this.model,
+    (schemaPath) => {
+      validateStandardSchema(schemaPath, loginSchema);
+    },
+    {
+      submission: {
+        action: async (field) => {
+          try {
+            await this.userService.saveLoginInfo(field().value());
+            return;
+          } catch {
+            return { kind: 'serverError', message: 'Failed to save login info' };
+          }
+        },
+        onInvalid: () => {
+          console.log('Invalid login');
+        },
+      },
+    },
+  );
 
   constructor() {
     // this.model.set({ email: 'test@test.com', password: 'password' });

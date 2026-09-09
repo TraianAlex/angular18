@@ -99,5 +99,36 @@
       "title": "ccccc",
       "completed": false
     }
+  ],
+  "login": [
+    {
+      "id": 1,
+      "email": "test@test.com",
+      "password": "test"
+    },
+    {
+      "email": "a@b.com",
+      "password": "x",
+      "id": 2
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "customerName": "John Doe",
+      "items": [
+        {
+          "product": "Wireless Headphones",
+          "quantity": 1
+        }
+      ]
+    }
   ]
 }

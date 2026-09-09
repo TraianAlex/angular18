@@ -177,6 +177,10 @@
       <p>{{ error.message }}</p>
       }
     </div>
+    <div class="form-row">
+      <label>Rating:</label>
+      <app-star-rating [formField]="userForm.rating" />
+    </div>
     @if (userForm().submitting()) {
     <button type="submit" disabled class="bg-gray-500 text-white rounded-md p-2">
       Submitting...
@@ -194,4 +198,5 @@
     </button>
   </form>
   <pre>{{ userForm().errors() | json }}</pre>
+  <pre>{{ userForm().value() | json }}</pre>
 </div>

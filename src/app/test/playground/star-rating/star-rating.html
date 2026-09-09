@@ -1,0 +1,11 @@
+<div class="star-rating-container" role="radiogroup" aria-label="Rate this item">
+  @for (star of stars; track star) {
+    <button
+      type="button"
+      [class.filled]="value() >= star"
+      (click)="value.set(star)"
+      [aria-label]="'Rate ' + star + ' stars'">
+      ★
+    </button>
+  }
+</div>

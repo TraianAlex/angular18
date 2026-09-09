@@ -23,6 +23,7 @@ import { mustBeFromValidProvider } from './validators/cc-validator';
 import { validateCreditCardNumber } from './validators/credit-card-validator';
 import { Address, addressSchema } from './validators/address-schema-validation';
 import { registerZipValidation } from './validators/zip.validator';
+import { StarRatingComponent } from './star-rating/star-rating';
 
 const loginSchema = z.object({
   email: z.email(),
@@ -69,7 +70,7 @@ const caZipSchema = schema<Address>((address) => {
   selector: 'app-playground',
   templateUrl: './playground.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormRoot, FormField, JsonPipe],
+  imports: [FormRoot, FormField, JsonPipe, StarRatingComponent],
 })
 export class PlaygroundComponent {
   userService = inject(UserService);
@@ -162,6 +163,7 @@ export class PlaygroundComponent {
       zip: '',
     },
     cc: '',
+    rating: 0,
   });
 
   userForm = form(

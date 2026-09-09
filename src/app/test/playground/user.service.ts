@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { UserInfo } from './user.types';
 
 export interface LineItem {
   product: string;
@@ -11,18 +12,6 @@ export interface LineItem {
 export interface OrderInfo {
   customerName: string;
   items: LineItem[];
-}
-
-export interface UserInfo {
-  firstName: string;
-  lastName: string;
-  address: {
-    street: string;
-    country: string;
-    city: string;
-    zip: string;
-  };
-  cc: string;
 }
 
 export interface LoginInfo {

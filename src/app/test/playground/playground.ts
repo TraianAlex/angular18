@@ -22,6 +22,7 @@ import { UserService } from './user.service';
 import { mustBeFromValidProvider } from './validators/cc-validator';
 import { validateCreditCardNumber } from './validators/credit-card-validator';
 import { Address, addressSchema } from './validators/address-schema-validation';
+import { registerZipValidation } from './validators/zip.validator';
 
 const loginSchema = z.object({
   email: z.email(),
@@ -197,23 +198,24 @@ export class PlaygroundComponent {
       //   ({ valueOf }) => valueOf(path.address.country) === 'CA',
       //   caZipSchema,
       // );
-      applyWhenValue(
-        path.address,
-        (address): address is UsAddress => address.country === 'US',
-        (address) => pattern(address.zip, /^\d{5}$/, { message: 'Zip code must be 5 digits' }),
-      );
-      applyWhenValue(
-        path.address,
-        (address): address is CaAddress => address.country === 'CA',
-        (address) =>
-          pattern(
-            address.zip,
-            /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] \d[ABCEGHJKLMNPRSTVWXYZ]\d$/,
-            {
-              message: 'Postal code must follow the A1A 1A1 format',
-            },
-          ),
-      );
+      // applyWhenValue(
+      //   path.address,
+      //   (address): address is UsAddress => address.country === 'US',
+      //   (address) => pattern(address.zip, /^\d{5}$/, { message: 'Zip code must be 5 digits' }),
+      // );
+      // applyWhenValue(
+      //   path.address,
+      //   (address): address is CaAddress => address.country === 'CA',
+      //   (address) =>
+      //     pattern(
+      //       address.zip,
+      //       /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] \d[ABCEGHJKLMNPRSTVWXYZ]\d$/,
+      //       {
+      //         message: 'Postal code must follow the A1A 1A1 format',
+      //       },
+      //     ),
+      // );
+      registerZipValidation(path.address.zip, path.address.country);
     },
     {
       submission: {

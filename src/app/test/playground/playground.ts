@@ -12,12 +12,23 @@ import {
   schema,
   applyWhen,
   applyWhenValue,
+  min,
+  applyEach,
 } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
 import { UserService } from './user.service';
 import { mustBeFromValidProvider } from './validators/cc-validator';
 import { validateCreditCardNumber } from './validators/credit-card-validator';
 import { Address, addressSchema } from './validators/address-schema-validation';
+
+interface LineItem {
+  product: string;
+  quantity: number;
+}
+const lineItemSchema = schema<LineItem>((item) => {
+  required(item.product, { message: 'Product name is required' });
+  min(item.quantity, 1, { message: 'Quantity must be at least 1' });
+});
 
 interface UsAddress {
   country: 'US';
@@ -32,6 +43,20 @@ interface CaAddress {
   zip: string;
 }
 type Address2 = UsAddress | CaAddress;
+
+const usZipSchema = schema<Address>((address) => {
+  pattern(address.zip, /^\d{5}$/, { message: 'Zip code must be 5 digits' });
+});
+const caZipSchema = schema<Address>((address) => {
+  pattern(
+    address.zip,
+    /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] \d[ABCEGHJKLMNPRSTVWXYZ]\d$/,
+    {
+      message: 'Zip code must follow the A1A 1A1 format',
+    },
+  );
+});
+
 @Component({
   selector: 'app-playground',
   templateUrl: './playground.html',
@@ -64,7 +89,32 @@ export class PlaygroundComponent {
       },
     ],
   });
-  orderForm = form(this.orderInfo);
+  orderForm = form(
+    this.orderInfo,
+    (path) => {
+      required(path.customerName);
+      // applyEach(path.items, (item) => {
+      //   required(item.product, { message: 'Product name is required' });
+      //   min(item.quantity, 1, { message: 'Quantity must be at least 1' });
+      // });
+      applyEach(path.items, lineItemSchema);
+    },
+    {
+      submission: {
+        action: async (field) => {
+          try {
+            await this.userService.saveOrderInfo(field().value());
+            return;
+          } catch {
+            return { kind: 'serverError', message: 'Failed to save order info' };
+          }
+        },
+        onInvalid: () => {
+          console.log('Invalid order');
+        },
+      },
+    },
+  );
 
   addItem() {
     this.orderForm.items().value.update((items) => [...items, { product: '', quantity: 1 }]);
@@ -84,19 +134,6 @@ export class PlaygroundComponent {
       zip: '',
     },
     cc: '',
-  });
-
-  usZipSchema = schema<Address>((address) => {
-    pattern(address.zip, /^\d{5}$/, { message: 'Zip code must be 5 digits' });
-  });
-  caZipSchema = schema<Address>((address) => {
-    pattern(
-      address.zip,
-      /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] \d[ABCEGHJKLMNPRSTVWXYZ]\d$/,
-      {
-        message: 'Zip code must follow the A1A 1A1 format',
-      },
-    );
   });
 
   userForm = form(
@@ -126,12 +163,12 @@ export class PlaygroundComponent {
       // applyWhen(
       //   path.address,
       //   ({ valueOf }) => valueOf(path.address.country) === 'US',
-      //   this.usZipSchema,
+      //   usZipSchema,
       // );
       // applyWhen(
       //   path.address,
       //   ({ valueOf }) => valueOf(path.address.country) === 'CA',
-      //   this.caZipSchema,
+      //   caZipSchema,
       // );
       applyWhenValue(
         path.address,
@@ -142,9 +179,13 @@ export class PlaygroundComponent {
         path.address,
         (address): address is CaAddress => address.country === 'CA',
         (address) =>
-          pattern(address.zip, /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] \d[ABCEGHJKLMNPRSTVWXYZ]\d$/, {
-            message: 'Postal code must follow the A1A 1A1 format',
-          }),
+          pattern(
+            address.zip,
+            /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] \d[ABCEGHJKLMNPRSTVWXYZ]\d$/,
+            {
+              message: 'Postal code must follow the A1A 1A1 format',
+            },
+          ),
       );
     },
     {

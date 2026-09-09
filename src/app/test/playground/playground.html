@@ -43,8 +43,11 @@
         type="text"
         [formField]="item.product"
         placeholder="Product"
-        class="border border-gray-300 rounded-md p-2 me-2"
+        class="border border-gray-300 rounded-md p-2 me-2 mb-2"
       />
+      @if(item.product().touched() && item.product().invalid()) {
+        <span class="text-red-500">{{ item.product().errors()[0].message }}</span>
+      }
       <label for="quantity" class="me-2">Quantity</label>
       <input
         id="quantity"
@@ -53,6 +56,14 @@
         placeholder="Quantity"
         class="border border-gray-300 rounded-md p-2 me-2"
       />
+      @if(item.quantity().touched() && item.quantity().invalid()) {
+        <span class="text-red-500">{{ item.quantity().errors()[0].message }}</span>
+      }
+      <div class="text-red-500">
+        @for(error of orderForm.items().errorSummary(); track error) {
+          <p>{{ error.message }}</p>
+        }
+      </div>
       <button
         type="button"
         (click)="removeItem($index)"
@@ -69,8 +80,27 @@
     >
       Add Item
     </button>
+    @if (orderForm().submitting()) {
+    <button type="submit" disabled class="bg-gray-500 text-white rounded-md p-2">
+      Submitting...
+    </button>
+    } @else {
+    <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Save</button>
+    }
   </form>
 
+  <div>
+    <span> Form state: </span>
+    <span>
+      @if(userForm().touched()) { Touched } @else { Untouched }
+    </span>
+    <span>
+      @if(userForm().valid()) { Valid } @else { Invalid }
+    </span>
+    <span>
+      @if(userForm().dirty()) { Dirty } @else { Pristine }
+    </span>
+  </div>
   <form [formRoot]="userForm" class="mt-4">
     <div class="mb-2">
       <label for="firstName" class="me-2">First Name</label>
@@ -115,19 +145,11 @@
         class="border border-gray-300 rounded-md p-2 mb-2 me-2"
       />
       <label for="country" class="me-2">Country</label>
-      <input
-        id="country"
-        type="text"
-        [formField]="addr.country"
-        class="border border-gray-300 rounded-md p-2 mb-2 me-2"
-      />
-      <label for="city" class="me-2">City</label>
-      <input
-        id="city"
-        type="text"
-        [formField]="addr.city"
-        class="border border-gray-300 rounded-md p-2 mb-2 me-2"
-      />
+      <select [formField]="addr.country" id="country" class="border border-gray-300 rounded-md p-2 mb-2 me-2">
+        <option value="US">United States</option>
+        <option value="CA">Canada</option>
+        <option value="FR">France</option>
+      </select>
       <label for="zip" class="me-2">Zip</label>
       <input
         id="zip"
@@ -166,4 +188,5 @@
       Save Manually
     </button>
   </form>
+  <pre>{{ userForm().errors() | json }}</pre>
 </div>

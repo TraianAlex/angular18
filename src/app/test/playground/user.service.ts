@@ -3,6 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
+export interface LineItem {
+  product: string;
+  quantity: number;
+}
+
+export interface OrderInfo {
+  customerName: string;
+  items: LineItem[];
+}
+
 export interface UserInfo {
   firstName: string;
   lastName: string;
@@ -24,5 +34,9 @@ export class UserService {
 
   saveUserInfo(userInfo: UserInfo): Promise<unknown> {
     return firstValueFrom(this.http.post(`${this.baseUrl}/users`, userInfo));
+  }
+
+  saveOrderInfo(orderInfo: OrderInfo): Promise<unknown> {
+    return firstValueFrom(this.http.post(`${this.baseUrl}/orders`, orderInfo));
   }
 }

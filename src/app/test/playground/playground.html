@@ -13,7 +13,9 @@
       class="border border-gray-300 rounded-md p-2 me-2"
     />
     @if (email.touched() && email.invalid()) {
-    <p class="text-red-500">Invalid email</p>
+      @for (error of email.errors(); track error) {
+        <p class="text-red-500">{{ error.message }}</p>
+      }
     }
     <input
       id="password"

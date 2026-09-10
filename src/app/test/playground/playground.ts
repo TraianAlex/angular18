@@ -23,6 +23,7 @@ import { mustBeFromValidProvider } from './validators/cc-validator';
 import { validateCreditCardNumber } from './validators/credit-card-validator';
 import { Address, addressSchema } from './validators/address-schema-validation';
 import { registerZipValidation } from './validators/zip.validator';
+import { registerUniqueEmailValidation } from './validators/email-unique.validator';
 import { StarRatingComponent } from './star-rating/star-rating';
 
 const loginSchema = z.object({
@@ -80,6 +81,7 @@ export class PlaygroundComponent {
     this.model,
     (schemaPath) => {
       validateStandardSchema(schemaPath, loginSchema);
+      registerUniqueEmailValidation(schemaPath.email);
     },
     {
       submission: {
@@ -222,6 +224,8 @@ export class PlaygroundComponent {
       //       },
       //     ),
       // );
+      // debounce(path.address.zip, 300);
+      // debounce(path.address.zip, 'blur');
       registerZipValidation(path.address.zip, path.address.country);
     },
     {

@@ -18,7 +18,7 @@ import {
 } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
 import * as z from 'zod';
-import { UserService } from './user.service';
+import { OrderInfo, UserService } from './user.service';
 import { mustBeFromValidProvider } from './validators/cc-validator';
 import { validateCreditCardNumber } from './validators/credit-card-validator';
 import { Address, addressSchema } from './validators/address-schema-validation';
@@ -83,9 +83,10 @@ export class PlaygroundComponent {
     },
     {
       submission: {
-        action: async (field) => {
+        action: async (form) => {
           try {
-            await this.userService.saveLoginInfo(field().value());
+            await this.userService.saveLoginInfo(form().value());
+            form().reset({ email: '', password: '' });
             return;
           } catch {
             return { kind: 'serverError', message: 'Failed to save login info' };
@@ -109,7 +110,7 @@ export class PlaygroundComponent {
     console.log(this.userForm.address.street().invalid(), this.userForm.address().valid());
   }
   // ------------------------------------------------------------
-  orderInfo = signal({
+  INITIAL_ORDER_INFO: OrderInfo = {
     customerName: '',
     items: [
       {
@@ -117,7 +118,8 @@ export class PlaygroundComponent {
         quantity: 1,
       },
     ],
-  });
+  };
+  orderInfo = signal<OrderInfo>({ ...this.INITIAL_ORDER_INFO });
   orderForm = form(
     this.orderInfo,
     (path) => {
@@ -130,9 +132,10 @@ export class PlaygroundComponent {
     },
     {
       submission: {
-        action: async (field) => {
+        action: async (form) => {
           try {
-            await this.userService.saveOrderInfo(field().value());
+            await this.userService.saveOrderInfo(form().value());
+            form().reset({ ...this.INITIAL_ORDER_INFO });
             return;
           } catch {
             return { kind: 'serverError', message: 'Failed to save order info' };
@@ -153,7 +156,8 @@ export class PlaygroundComponent {
     this.orderForm.items().value.update((items) => items.filter((_, i) => i !== index));
   }
   // ------------------------------------------------------------
-  userInfo = signal({
+
+  INITIAL_USER_INFO = {
     firstName: '',
     lastName: '',
     address: {
@@ -164,7 +168,8 @@ export class PlaygroundComponent {
     },
     cc: '',
     rating: 0,
-  });
+  };
+  userInfo = signal({ ...this.INITIAL_USER_INFO });
 
   userForm = form(
     this.userInfo,
@@ -224,6 +229,9 @@ export class PlaygroundComponent {
         action: async (field) => {
           try {
             await this.userService.saveUserInfo(field().value());
+            field().reset({
+              ...this.INITIAL_USER_INFO,
+            });
             return;
           } catch {
             return { kind: 'serverError', message: 'Failed to save user info' };
@@ -240,6 +248,9 @@ export class PlaygroundComponent {
     const success = await submit(this.userForm, async (field) => {
       try {
         await this.userService.saveUserInfo(field().value());
+        field().reset({
+          ...this.INITIAL_USER_INFO,
+        });
         return;
       } catch {
         return { kind: 'serverError', message: 'Failed to save user info' };

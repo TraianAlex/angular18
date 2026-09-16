@@ -23,13 +23,8 @@ import { mustBeFromValidProvider } from './validators/cc-validator';
 import { validateCreditCardNumber } from './validators/credit-card-validator';
 import { Address, addressSchema } from './validators/address-schema-validation';
 import { registerZipValidation } from './validators/zip.validator';
-import { registerUniqueEmailValidation } from './validators/email-unique.validator';
 import { StarRatingComponent } from './star-rating/star-rating';
-
-const loginSchema = z.object({
-  email: z.email(),
-  password: z.string().min(8),
-});
+import { LoginFormComponent } from './login-form';
 
 interface LineItem {
   product: string;
@@ -71,47 +66,18 @@ const caZipSchema = schema<Address>((address) => {
   selector: 'app-playground',
   templateUrl: './playground.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormRoot, FormField, JsonPipe, StarRatingComponent],
+  imports: [FormRoot, FormField, JsonPipe, StarRatingComponent, LoginFormComponent],
 })
 export class PlaygroundComponent {
   userService = inject(UserService);
 
-  model = signal<{ email: string; password: string }>({ email: '', password: '' });
-  loginForm = form(
-    this.model,
-    (schemaPath) => {
-      validateStandardSchema(schemaPath, loginSchema);
-      registerUniqueEmailValidation(schemaPath.email);
-    },
-    {
-      submission: {
-        action: async (form) => {
-          try {
-            await this.userService.saveLoginInfo(form().value());
-            form().reset({ email: '', password: '' });
-            return;
-          } catch {
-            return { kind: 'serverError', message: 'Failed to save login info' };
-          }
-        },
-        onInvalid: () => {
-          console.log('Invalid login');
-        },
-      },
-    },
-  );
-
   constructor() {
-    // this.model.set({ email: 'test@test.com', password: 'password' });
-    // this.loginForm().value.set({ email: 'test2@test.com', password: 'password2' });
-    // this.loginForm.email().value.set('test3@test.com');
-    // this.loginForm.password().value.set('password3');
     console.log(this.orderForm.items[0].product);
     console.log(this.orderForm.items[0].quantity);
     this.userForm.address.city().value.set('John');
     console.log(this.userForm.address.street().invalid(), this.userForm.address().valid());
   }
-  // ------------------------------------------------------------
+
   INITIAL_ORDER_INFO: OrderInfo = {
     customerName: '',
     items: [

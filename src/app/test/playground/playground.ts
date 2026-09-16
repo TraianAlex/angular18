@@ -13,27 +13,16 @@ import {
   applyWhen,
   applyWhenValue,
   min,
-  applyEach,
-  validateStandardSchema,
 } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
-import * as z from 'zod';
-import { OrderInfo, UserService } from './user.service';
+import { UserService } from './user.service';
 import { mustBeFromValidProvider } from './validators/cc-validator';
 import { validateCreditCardNumber } from './validators/credit-card-validator';
 import { Address, addressSchema } from './validators/address-schema-validation';
 import { registerZipValidation } from './validators/zip.validator';
 import { StarRatingComponent } from './star-rating/star-rating';
 import { LoginFormComponent } from './login-form';
-
-interface LineItem {
-  product: string;
-  quantity: number;
-}
-const lineItemSchema = schema<LineItem>((item) => {
-  required(item.product, { message: 'Product name is required' });
-  min(item.quantity, 1, { message: 'Quantity must be at least 1' });
-});
+import { OrderFormComponent } from './order-form';
 
 interface UsAddress {
   country: 'US';
@@ -66,64 +55,22 @@ const caZipSchema = schema<Address>((address) => {
   selector: 'app-playground',
   templateUrl: './playground.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormRoot, FormField, JsonPipe, StarRatingComponent, LoginFormComponent],
+  imports: [
+    FormRoot,
+    FormField,
+    JsonPipe,
+    StarRatingComponent,
+    LoginFormComponent,
+    OrderFormComponent,
+  ],
 })
 export class PlaygroundComponent {
   userService = inject(UserService);
 
   constructor() {
-    console.log(this.orderForm.items[0].product);
-    console.log(this.orderForm.items[0].quantity);
     this.userForm.address.city().value.set('John');
     console.log(this.userForm.address.street().invalid(), this.userForm.address().valid());
   }
-
-  INITIAL_ORDER_INFO: OrderInfo = {
-    customerName: '',
-    items: [
-      {
-        product: '',
-        quantity: 1,
-      },
-    ],
-  };
-  orderInfo = signal<OrderInfo>({ ...this.INITIAL_ORDER_INFO });
-  orderForm = form(
-    this.orderInfo,
-    (path) => {
-      required(path.customerName);
-      // applyEach(path.items, (item) => {
-      //   required(item.product, { message: 'Product name is required' });
-      //   min(item.quantity, 1, { message: 'Quantity must be at least 1' });
-      // });
-      applyEach(path.items, lineItemSchema);
-    },
-    {
-      submission: {
-        action: async (form) => {
-          try {
-            await this.userService.saveOrderInfo(form().value());
-            form().reset({ ...this.INITIAL_ORDER_INFO });
-            return;
-          } catch {
-            return { kind: 'serverError', message: 'Failed to save order info' };
-          }
-        },
-        onInvalid: () => {
-          console.log('Invalid order');
-        },
-      },
-    },
-  );
-
-  addItem() {
-    this.orderForm.items().value.update((items) => [...items, { product: '', quantity: 1 }]);
-  }
-
-  removeItem(index: number) {
-    this.orderForm.items().value.update((items) => items.filter((_, i) => i !== index));
-  }
-  // ------------------------------------------------------------
 
   INITIAL_USER_INFO = {
     firstName: '',

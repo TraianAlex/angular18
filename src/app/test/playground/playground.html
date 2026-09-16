@@ -2,68 +2,7 @@
   <h2 class="text-xl font-semibold text-gray-800 mb-2">Playground</h2>
 
   <app-login-form />
-
-  <form [formRoot]="orderForm" class="mt-4">
-    <label for="customerName" class="me-2">Customer</label>
-    <input
-      id="customerName"
-      type="text"
-      [formField]="orderForm.customerName"
-      class="border border-gray-300 rounded-md p-2 mb-2 me-2"
-    />
-    @for (item of orderForm.items; track item) {
-    <div class="mb-2">
-      <label for="product" class="me-2">Product</label>
-      <input
-        id="product"
-        type="text"
-        [formField]="item.product"
-        placeholder="Product"
-        class="border border-gray-300 rounded-md p-2 me-2 mb-2"
-      />
-      @if(item.product().touched() && item.product().invalid()) {
-        <span class="text-red-500">{{ item.product().errors()[0].message }}</span>
-      }
-      <label for="quantity" class="me-2">Quantity</label>
-      <input
-        id="quantity"
-        type="number"
-        [formField]="item.quantity"
-        placeholder="Quantity"
-        class="border border-gray-300 rounded-md p-2 me-2"
-      />
-      @if(item.quantity().touched() && item.quantity().invalid()) {
-        <span class="text-red-500">{{ item.quantity().errors()[0].message }}</span>
-      }
-      <div class="text-red-500">
-        @for(error of orderForm.items().errorSummary(); track error) {
-          <p>{{ error.message }}</p>
-        }
-      </div>
-      <button
-        type="button"
-        (click)="removeItem($index)"
-        class="bg-red-500 text-white rounded-md p-2"
-      >
-        Remove
-      </button>
-    </div>
-    }
-    <button
-      type="button"
-      (click)="addItem()"
-      class="bg-green-500 text-white rounded-md p-2 mt-2 mb-2"
-    >
-      Add Item
-    </button>
-    @if (orderForm().submitting()) {
-    <button type="submit" disabled class="bg-gray-500 text-white rounded-md p-2">
-      Submitting...
-    </button>
-    } @else {
-    <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Save</button>
-    }
-  </form>
+  <app-order-form />
 
   <div>
     <span> Form state: </span>

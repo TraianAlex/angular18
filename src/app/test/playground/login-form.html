@@ -26,6 +26,7 @@
      @if (password.touched() && password.invalid()) {
       <p class="text-red-500">Invalid password</p>
       }
+    <app-basic-toggle label="Remember me" [formField]="loginForm.rememberMe" />
     <button type="submit" class="bg-blue-500 text-white rounded-md p-2">Login</button>
   </form>
 

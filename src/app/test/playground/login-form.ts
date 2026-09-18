@@ -4,22 +4,28 @@ import { JsonPipe } from '@angular/common';
 import * as z from 'zod';
 import { UserService } from './user.service';
 import { registerUniqueEmailValidation } from './validators/email-unique.validator';
+import { BasicToggle } from './basic-toggle/basic-toggle';
 
 const loginSchema = z.object({
   email: z.email(),
   password: z.string().min(8),
+  rememberMe: z.boolean(),
 });
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormRoot, FormField, JsonPipe],
+  imports: [FormRoot, FormField, JsonPipe, BasicToggle],
 })
 export class LoginFormComponent {
   userService = inject(UserService);
 
-  model = signal<{ email: string; password: string }>({ email: '', password: '' });
+  model = signal<{ email: string; password: string; rememberMe: boolean }>({
+    email: '',
+    password: '',
+    rememberMe: false,
+  });
   loginForm = form(
     this.model,
     (schemaPath) => {
@@ -31,7 +37,7 @@ export class LoginFormComponent {
         action: async (form) => {
           try {
             await this.userService.saveLoginInfo(form().value());
-            form().reset({ email: '', password: '' });
+            form().reset({ email: '', password: '', rememberMe: false });
             return;
           } catch {
             return { kind: 'serverError', message: 'Failed to save login info' };

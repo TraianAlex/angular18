@@ -17,6 +17,7 @@ export interface OrderInfo {
 export interface LoginInfo {
   email: string;
   password: string;
+  rememberMe?: boolean;
 }
 
 @Injectable({

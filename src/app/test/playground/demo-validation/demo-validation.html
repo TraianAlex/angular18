@@ -1,0 +1,96 @@
+<section class="mb-8 rounded-lg border border-gray-200 bg-white p-6 shadow-md">
+  <h2 class="text-xl font-semibold text-gray-800">Signal Forms validation demos</h2>
+  <p class="mt-1 text-sm text-gray-600">
+    Small, copyable examples from the Angular Signal Forms CSS status classes (`ng-invalid`,
+    `ng-valid`, `ng-dirty`) are configured in `app.config.ts`.
+  </p>
+
+  <div class="mt-4 space-y-3">
+    <details class="rounded-lg border border-slate-200 bg-slate-50 p-4" open>
+      <summary class="cursor-pointer text-lg font-semibold text-gray-800">
+        Built-in validators, `when`, and custom error objects
+      </summary>
+      <p class="mt-1 text-sm text-gray-600">
+        `required`, `email`, `minLength`, `min`, `max`, conditional `when`, and replacing the error
+        object with `error`.
+      </p>
+      <app-built-in-demo />
+    </details>
+
+    <details class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <summary class="cursor-pointer text-lg font-semibold text-gray-800">
+        Custom `validate` and `validateTree`
+      </summary>
+      <p class="mt-1 text-sm text-gray-600">
+        No-spaces username, password match (auto-tracks `password`), and a tree rule that reports on
+        last name.
+      </p>
+      <app-custom-demo />
+    </details>
+
+    <details class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <summary class="cursor-pointer text-lg font-semibold text-gray-800">
+        Async HTTP validation and field debounce
+      </summary>
+      <p class="mt-1 text-sm text-gray-600">
+        `validateHttp` against json-server (`test@test.com` is taken). Search query uses
+        `debounce(path, 300)` so the model lags behind typing.
+      </p>
+      <app-async-demo />
+    </details>
+
+    <details class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <summary class="cursor-pointer text-lg font-semibold text-gray-800">
+        Disabled, hidden, and readonly
+      </summary>
+      <p class="mt-1 text-sm text-gray-600">
+        Wholesale disables discount codes. Company name is hidden unless the customer is a business.
+        Total is readonly. Hidden fields are omitted from the template with &#64;if.
+      </p>
+      <app-conditions-demo />
+    </details>
+
+    <details class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <summary class="cursor-pointer text-lg font-semibold text-gray-800">
+        Reusable schemas: `apply`, `applyEach`, `applyWhen`, `applyWhenValue`
+      </summary>
+      <p class="mt-1 text-sm text-gray-600">
+        Shared address/contact schemas, array `applyEach`, card payment `applyWhen`, and invoice
+        `applyWhenValue`.
+      </p>
+      <app-schema-demo />
+    </details>
+
+    <details class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <summary class="cursor-pointer text-lg font-semibold text-gray-800">
+        Zod `validateStandardSchema` (including dynamic schema)
+      </summary>
+      <p class="mt-1 text-sm text-gray-600">
+        One Zod object drives the form. Strict mode swaps in a longer min-length schema.
+      </p>
+      <app-standard-schema-demo />
+    </details>
+
+    <details class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <summary class="cursor-pointer text-lg font-semibold text-gray-800">
+        Custom controls: `FormValueControl`, `FormCheckboxControl`, `transformedValue`
+      </summary>
+      <p class="mt-1 text-sm text-gray-600">
+        A text control with automatic error/disabled binding, a checkbox contract, and a money input
+        that parses raw text to a number.
+      </p>
+      <app-controls-demo />
+    </details>
+
+    <details class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <summary class="cursor-pointer text-lg font-semibold text-gray-800">
+        Migration: `compatForm` and `SignalFormControl`
+      </summary>
+      <p class="mt-1 text-sm text-gray-600">
+        Mix an existing `FormControl` into a signal form, and drop a `SignalFormControl` into a
+        Reactive `FormGroup`.
+      </p>
+      <app-compat-demo />
+    </details>
+  </div>
+</section>

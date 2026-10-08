@@ -1,6 +1,13 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { email, FormField, required } from '@angular/forms/signals';
+import {
+  disabled,
+  email,
+  FormField,
+  required,
+  validate,
+  validateHttp,
+} from '@angular/forms/signals';
 import { compatForm, SignalFormControl } from '@angular/forms/signals/compat';
 import { JsonPipe } from '@angular/common';
 import { DemoFieldErrors } from './field-errors';
@@ -84,7 +91,16 @@ export class CompatDemo {
     age: this.ageControl,
   });
 
-  readonly compatSignalForm = compatForm(this.compatModel);
+  readonly compatSignalForm = compatForm(this.compatModel, (f) => {
+    required(f.name); // ✅ OK - regular field
+    // required(f.age); // ❌ Compilation error - age is FormControl
+
+    // But you can read FormControl values in validators of other fields:
+    validate(f.name, ({ valueOf }) => {
+      return valueOf(f.age) < 18 ? { kind: 'too-young' } : undefined;
+    });
+  });
+
   readonly assembledValue = computed(() => ({
     name: this.compatSignalForm.name().value(),
     age: this.compatSignalForm.age().value(),
@@ -93,10 +109,21 @@ export class CompatDemo {
   readonly emailControl = new SignalFormControl<string>('', (path) => {
     required(path, { message: 'Email is required' });
     email(path, { message: 'Provide a valid email address' });
+    // disabled(path, { when: () => this.isLoading() });
+
+    validateHttp(path, {
+      debounce: 300,
+      request: ({ value }) => `/api/check-email?email=${value()}`,
+      onSuccess: (res: { taken: boolean }) =>
+        res.taken ? { kind: 'taken', message: 'Already registered' } : null,
+      onError: () => ({ kind: 'network', message: 'Could not verify' }),
+    });
   });
 
   readonly userForm = this.fb.nonNullable.group({
     firstName: ['', Validators.required],
     email: this.emailControl,
   });
+
+  readonly current = this.emailControl.sourceValue();
 }
